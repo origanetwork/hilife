@@ -1,5 +1,9 @@
+"use client";
 import Image from "next/image";
 import { Playfair_Display, Poppins } from "next/font/google";
+import { MotionSection } from "./Motion";
+import { motion } from "framer-motion";
+import { staggerContainer, staggerItem } from "./Animate";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -48,7 +52,7 @@ const products = [
 
 export default function FeaturedProducts() {
   return (
-    <section id="products" className="w-full px-6 pt-6 md:pt-8 pb-12 md:pb-16 scroll-mt-28 md:scroll-mt-36">
+    <MotionSection id="products" className="w-full px-6 pt-6 md:pt-8 pb-12 md:pb-16 scroll-mt-28 md:scroll-mt-36">
       <div className="max-w-5xl mx-auto text-center">
         <h2
           className={`${playfair.className} font-semibold text-[40px] leading-[100%] bg-[linear-gradient(180deg,#AECB06_57.48%,#576503_69.82%)] bg-clip-text text-transparent`}
@@ -62,10 +66,17 @@ export default function FeaturedProducts() {
         </p>
       </div>
       <div className="w-full mt-8">
-        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 lg:gap-8 sm:overflow-visible">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="flex gap-4 overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 lg:gap-8 sm:overflow-visible"
+        >
           {products.map((p) => (
-            <div
+            <motion.div
               key={p.title}
+              variants={staggerItem}
               className="flex-none snap-center w-[85%] sm:w-auto rounded-2xl border border-black/10 bg-white shadow-md overflow-hidden mx-0 sm:mx-auto lg:max-w-[330px]"
             >
               <div className="relative aspect-4/3">
@@ -109,10 +120,10 @@ export default function FeaturedProducts() {
                   Add to Cart
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </MotionSection>
   );
 }

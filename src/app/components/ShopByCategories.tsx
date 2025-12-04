@@ -1,6 +1,8 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { Playfair_Display, Poppins } from "next/font/google";
+import { MotionSection } from "./Motion";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -22,7 +24,7 @@ const categories = [
 
 export default function ShopByCategories() {
   return (
-    <section className="w-full px-6 py-12 md:py-16">
+    <MotionSection className="w-full px-6 py-12 md:py-16">
       <div className="max-w-5xl mx-auto text-center">
         <h2
           className={`${playfair.className} font-semibold text-[40px] leading-[100%] bg-[linear-gradient(180deg,#AECB06_57.48%,#576503_69.82%)] bg-clip-text text-transparent`}
@@ -54,7 +56,7 @@ export default function ShopByCategories() {
           ))}
         </div>
       </div>
-    </section>
+    </MotionSection>
   );
 }
 

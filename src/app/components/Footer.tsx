@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Playfair_Display, Poppins } from "next/font/google";
+import { MotionSection } from "./Motion";
 
 const playfair = Playfair_Display({ weight: ["600"], subsets: ["latin"], display: "swap" });
 const poppins = Poppins({ weight: ["400", "500", "600"], subsets: ["latin"], display: "swap" });
@@ -37,7 +38,7 @@ const columns = [
 
 export default function Footer() {
   return (
-    <footer
+    <MotionSection
       className="mt-16 text-white rounded-tl-[56px] md:rounded-tl-[96px] overflow-hidden"
       style={{ background: "linear-gradient(136.02deg, #000000 42.64%, #A0A0A0 81.82%)" }}
     >
@@ -116,6 +117,6 @@ export default function Footer() {
           © {new Date().getFullYear()} Hilife Mattress | All Rights Reserved
         </div>
       </div>
-    </footer>
+    </MotionSection>
   );
 }

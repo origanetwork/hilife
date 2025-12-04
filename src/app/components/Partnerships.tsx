@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { Playfair_Display, Poppins } from "next/font/google";
+import { MotionSection } from "./Motion";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -32,7 +33,7 @@ export default function Partnerships() {
     return () => clearInterval(id);
   }, []);
   return (
-    <section className="w-full mt-6 md:mt-0 lg:mt-30 px-6 pt-0 md:pt-0 pb-10 md:pb-14">
+    <MotionSection className="w-full mt-6 md:mt-0 lg:mt-30 px-6 pt-0 md:pt-0 pb-10 md:pb-14">
       <div className="max-w-6xl mx-auto text-center">
         <h2
           className={`${playfair.className} font-semibold text-[40px] leading-[100%] bg-[linear-gradient(180deg,#AECB06_57.48%,#576503_69.82%)] bg-clip-text text-transparent lg:whitespace-nowrap`}
@@ -72,7 +73,7 @@ export default function Partnerships() {
           ))}
         </div>
       </div>
-    </section>
+    </MotionSection>
   );
 }
 

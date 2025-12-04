@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Risque, Roboto, Playfair_Display } from "next/font/google";
+import { MotionSection } from "./Motion";
 
 const risque = Risque({ weight: "400", subsets: ["latin"] });
 const playfair = Playfair_Display({ 
@@ -13,7 +14,7 @@ const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
 export default function PartnerWith() {
   return (
-    <section
+    <MotionSection
       id="partner"
       className="w-full lg:mt-10"
     >
@@ -216,6 +217,6 @@ export default function PartnerWith() {
           </div>
         </div>
       </div>
-    </section>
+    </MotionSection>
   );
 }

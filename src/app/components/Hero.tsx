@@ -1,6 +1,9 @@
+"use client";
 import Image from "next/image";
 import { Playfair_Display } from "next/font/google";
 import Header from "./Header";
+import { motion } from "framer-motion";
+import { fadeInProps } from "./Animate";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -9,7 +12,7 @@ const playfair = Playfair_Display({
 
 export default function Hero() {
   return (
-    <section className="relative w-full bg-white md:bg-[linear-gradient(to_right,white_0%,white_48%,#008AD2_48%,#008AD2_100%)] pt-24 md:pt-0">
+    <motion.section {...fadeInProps} className="relative w-full bg-white md:bg-[linear-gradient(to_right,white_0%,white_48%,#008AD2_48%,#008AD2_100%)] pt-24 md:pt-0">
       <Header />
       <div className="relative grid grid-cols-1 md:grid-cols-2 items-stretch">
         {/* Blue layer to fill the rounded top-right cutout of the left image */}
@@ -27,16 +30,16 @@ export default function Hero() {
         </div>
 
         {/* Right: Blue panel with headline + CTA */}
-        <div className="relative z-10 flex flex-col justify-center gap-6 bg-[#008AD2] px-6 md:px-10 pt-10 md:pt-36 lg:pt-40 pb-10 rounded-tr-[40px] md:rounded-tr-[56px]">
-          <h1 className={`${playfair.className} uppercase text-white text-[34px] sm:text-[40px] md:text-[52px] leading-[111%] font-semibold`}>
+        <motion.div {...fadeInProps} className="relative z-10 flex flex-col justify-center gap-6 bg-[#008AD2] px-6 md:px-10 pt-10 md:pt-36 lg:pt-40 pb-10 rounded-tr-[40px] md:rounded-tr-[56px]">
+          <motion.h1 {...fadeInProps} className={`${playfair.className} uppercase text-white text-[34px] sm:text-[40px] md:text-[52px] leading-[111%] font-semibold`}>
             Sleep Like <br /> You’re Floating <br /> on Clouds
-          </h1>
+          </motion.h1>
 
           <div>
-            <button className="inline-flex items-center gap-2 rounded-[14px] bg-[linear-gradient(84.62deg,#000000_84.16%,#5A5A5A_95.12%)] text-white px-[12px] py-[12px] text-sm md:text-[15px] font-medium shadow">
+            <motion.button {...fadeInProps} className="inline-flex items-center gap-2 rounded-[14px] bg-[linear-gradient(84.62deg,#000000_84.16%,#5A5A5A_95.12%)] text-white px-[12px] py-[12px] text-sm md:text-[15px] font-medium shadow">
               Explore Products
               <span aria-hidden>→</span>
-            </button>
+            </motion.button>
           </div>
 
           {/* Decorative vector */}
@@ -50,8 +53,8 @@ export default function Hero() {
               priority={false}
             />
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

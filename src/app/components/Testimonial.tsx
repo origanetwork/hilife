@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Playfair_Display, Poppins } from "next/font/google";
+import { MotionSection } from "./Motion";
 
 const playfair = Playfair_Display({
   weight: ["600"],
@@ -88,7 +89,7 @@ export default function Testimonial() {
   }, []);
 
   return (
-    <section className="w-full px-4 md:px-6 lg:px-8 py-16 md:py-20">
+    <MotionSection className="w-full px-4 md:px-6 lg:px-8 py-16 md:py-20">
       <div className="w-full text-center">
         <h2
           className={`${playfair.className} font-semibold text-[32px] md:text-[40px] leading-[100%] bg-[linear-gradient(180deg,#AECB06_57.48%,#576503_69.82%)] bg-clip-text text-transparent`}
@@ -148,6 +149,6 @@ export default function Testimonial() {
           ))}
         </div>
       </div>
-    </section>
+    </MotionSection>
   );
 }

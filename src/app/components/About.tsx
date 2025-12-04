@@ -1,5 +1,8 @@
+"use client";
 import Image from "next/image";
 import { Playfair_Display, Poppins } from "next/font/google";
+import { motion } from "framer-motion";
+import { fadeInProps } from "./Animate";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -13,7 +16,7 @@ const poppins = Poppins({
 
 export default function About() {
   return (
-    <section id="about" className="w-full px-6 pt-0 pb-0 md:pb-2 scroll-mt-28 md:scroll-mt-36">
+    <motion.section {...fadeInProps} id="about" className="w-full px-6 pt-0 pb-0 md:pb-2 scroll-mt-28 md:scroll-mt-36">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[1.5fr_1fr] lg:grid-cols-[1.8fr_1fr] gap-2 md:gap-10 lg:gap-16 items-start">
         {/* Left: Image */}
         <div className="relative w-full lg:w-full mx-auto md:mx-0 h-[200px] sm:h-[260px] md:h-[380px] lg:h-[440px] xl:h-[500px] max-h-[500px] rounded-t-[220px] md:rounded-t-[320px] overflow-hidden">
@@ -49,6 +52,6 @@ export default function About() {
           </button>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

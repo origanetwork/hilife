@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Poppins } from "next/font/google";
+import { MotionSection } from "./Motion";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -46,7 +47,7 @@ const insights = [
 
 export default function InsightSection() {
   return (
-    <section className="w-full px-6 py-14 md:py-20">
+    <MotionSection className="w-full px-6 py-14 md:py-20">
       <div className="max-w-7xl mx-auto text-center">
         <h2
           className={`${poppins.className} font-bold text-[32px] md:text-[42px]  bg-[linear-gradient(180deg,#AECB06_57.48%,#576503_69.82%)] bg-clip-text text-transparent inline-block`}
@@ -173,6 +174,6 @@ export default function InsightSection() {
           ))}
         </div>
       </div>
-    </section>
+    </MotionSection>
   );
 }
