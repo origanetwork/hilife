@@ -1,26 +1,46 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Glass toolbar pill container */
+.glass-toolbar {
+  background: rgba(255, 255, 255, 0.10);
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  backdrop-filter: blur(22.360000610351562px);
+  -webkit-backdrop-filter: blur(22.360000610351562px);
+  /* only soft outer shadows; remove inset white glows that looked like borders */
+  box-shadow:
+    -1.86px -1.73px 12px -8px #00000026,
+    -11.15px -10.39px 48px -12px #00000026;
+  border: none;
+  border-image: none;
+  outline: none;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Prevent focus outlines on icon buttons inside the glass toolbar */
+.glass-toolbar button {
+  outline: none;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.glass-toolbar button:focus,
+.glass-toolbar button:focus-visible {
+  outline: none;
+  box-shadow: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Smooth scroll for in-page anchor navigation */
+html {
+  scroll-behavior: smooth;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Prevent horizontal scroll/white strip on mobile */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+/* Ensure root container cannot overflow horizontally */
+#__next, body > div:first-child {
+  overflow-x: hidden;
 }
