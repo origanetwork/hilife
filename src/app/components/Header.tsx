@@ -2,10 +2,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { FiShoppingCart, FiPhone, FiUser, FiMenu, FiX } from "react-icons/fi";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   return (
     <header className="absolute inset-x-0 top-0 z-50 w-full">
       <div className="mx-auto flex items-center justify-between md:justify-around gap-6 px-6 py-3 md:py-8">
@@ -23,26 +26,34 @@ export default function Header() {
         <nav className="hidden md:flex items-center gap-1 rounded-full border border-white/30 bg-white/20 backdrop-blur-md px-3 py-3 shadow-sm">
           <Link
             href="/"
-            className="px-4 py-2 rounded-full bg-white text-[#000000] font-medium shadow-sm"
+            className="px-4 py-2 rounded-full bg-white text-[#000000] font-medium shadow-sm hover:bg-[#008AD2] hover:text-white"
           >
             Home
           </Link>
-          <Link href="/#about" className="px-4 py-2 rounded-full  text-[#000000]   hover:text-white">
+          <Link href="/about" className="px-4 py-2 rounded-full text-[#000000] hover:bg-[#008AD2] hover:text-white">
             About us
           </Link>
-          <Link href="/#products" className="px-4 py-2 rounded-full  text-[#000000]   hover:text-white">
+          <Link href="/products" className="px-4 py-2 rounded-full text-[#000000] hover:bg-[#008AD2] hover:text-white">
             Products
           </Link>
-          <Link href="/#contact" className="px-4 py-2 rounded-full  text-[#000000]   hover:text-white">
-            Brochure
+          
+          <Link href="/dealers" className="px-4 py-2 rounded-full text-[#000000] hover:bg-[#008AD2] hover:text-white">
+            Dealer
           </Link>
-          <Link href="/#contact" className="px-4 py-2 rounded-full  text-[#000000]   hover:text-white">
+          
+          <Link href="/gallery" className="px-4 py-2 rounded-full text-[#000000] hover:bg-[#008AD2] hover:text-white">
+            Gallery
+          </Link>
+          <Link href="/blog" className="px-4 py-2 rounded-full text-[#000000] hover:bg-[#008AD2] hover:text-white">
+            Blog
+          </Link>
+          <Link href="/contact" className="px-4 py-2 rounded-full text-[#000000] hover:bg-[#008AD2] hover:text-white">
             Contact Us
           </Link>
         </nav>
 
         <div className="hidden md:flex">
-          <div className="glass-toolbar grid grid-cols-3 items-center justify-items-center w-56 rounded-full px-3 py-2 text-white">
+          <div className={`glass-toolbar grid grid-cols-3 items-center justify-items-center w-56 rounded-full px-3 py-2 ${isHome ? "text-white" : "text-black"}`}>
             <button aria-label="Cart" className="inline-flex items-center justify-center h-11 w-11 rounded-full bg-transparent hover:bg-transparent border-0 appearance-none ring-0 focus:ring-0 focus-visible:ring-0 outline-none focus:outline-none focus-visible:outline-none shadow-none">
               <FiShoppingCart className="h-6 w-6" />
             </button>
@@ -77,11 +88,13 @@ export default function Header() {
             <FiX className="h-6 w-6" />
           </button>
           <div className="flex flex-col gap-3">
-            <Link href="/" onClick={() => setOpen(false)} className="px-4 py-3 rounded-xl bg-white text-[#000000] font-medium shadow">Home</Link>
-            <Link href="/#about" onClick={() => setOpen(false)} className="px-4 py-3 rounded-xl text-[#000000] hover:bg-white/60">About us</Link>
-            <Link href="/#products" onClick={() => setOpen(false)} className="px-4 py-3 rounded-xl text-[#000000] hover:bg-white/60">Products</Link>
-            <Link href="/#contact" onClick={() => setOpen(false)} className="px-4 py-3 rounded-xl text-[#000000] hover:bg-white/60">Brochure</Link>
-            <Link href="/#contact" onClick={() => setOpen(false)} className="px-4 py-3 rounded-xl text-[#000000] hover:bg-white/60">Contact Us</Link>
+            <Link href="/" onClick={() => setOpen(false)} className="px-4 py-3 rounded-xl bg-white text-[#000000] font-medium shadow hover:bg-[#008AD2] hover:text-white">Home</Link>
+            <Link href="/about" onClick={() => setOpen(false)} className="px-4 py-3 rounded-xl text-[#000000] hover:bg-[#008AD2] hover:text-white">About us</Link>
+            <Link href="/products" onClick={() => setOpen(false)} className="px-4 py-3 rounded-xl text-[#000000] hover:bg-[#008AD2] hover:text-white">Products</Link>
+            <Link href="/gallery" onClick={() => setOpen(false)} className="px-4 py-3 rounded-xl text-[#000000] hover:bg-[#008AD2] hover:text-white">Gallery</Link>
+            <Link href="/dealers" onClick={() => setOpen(false)} className="px-4 py-3 rounded-xl text-[#000000] hover:bg-[#008AD2] hover:text-white">Dealers</Link>
+            <Link href="/blog" onClick={() => setOpen(false)} className="px-4 py-3 rounded-xl text-[#000000] hover:bg-[#008AD2] hover:text-white">Blog</Link>
+            <Link href="/contact" onClick={() => setOpen(false)} className="px-4 py-3 rounded-xl text-[#000000] hover:bg-[#008AD2] hover:text-white">Contact Us</Link>
           </div>
         </div>
       )}

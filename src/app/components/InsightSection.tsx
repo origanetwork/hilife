@@ -50,9 +50,9 @@ export default function InsightSection() {
     <MotionSection className="w-full px-6 py-14 md:py-20">
       <div className="max-w-7xl mx-auto text-center">
         <h2
-          className={`${poppins.className} font-bold text-[32px] md:text-[42px]  bg-[linear-gradient(180deg,#AECB06_57.48%,#576503_69.82%)] bg-clip-text text-transparent inline-block`}
+          className={`${poppins.className} font-bold text-[32px] md:text-[42px] text-[#008AD2] inline-block`}
         >
-          Insights to Elevate Your Sleep
+          Insights to Elevate Your <span className="text-[#AECB06]">Sleep</span>
         </h2>
       </div>
 

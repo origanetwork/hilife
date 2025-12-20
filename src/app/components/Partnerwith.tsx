@@ -1,16 +1,12 @@
 import Image from "next/image";
-import { Risque, Roboto, Playfair_Display } from "next/font/google";
+import { Risque, Roboto, Playfair_Display, Poppins } from "next/font/google";
 import { MotionSection } from "./Motion";
 
-const risque = Risque({ weight: "400", subsets: ["latin"] });
-const playfair = Playfair_Display({ 
-  weight: ["600"], 
+
+const poppins = Poppins({
   subsets: ["latin"],
-  style: ["normal"],
-  display: "swap"
+  weight: ["600","500","400"],
 });
-const robotoBold = Roboto({ weight: "700", subsets: ["latin"] });
-const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
 export default function PartnerWith() {
   return (
@@ -22,19 +18,19 @@ export default function PartnerWith() {
         <div className="grid md:grid-cols-2 items-start gap-8">
           <div className="md:col-start-1">
             <div className="text-left">
-              <h2 className={`${playfair.className} text-[54px] leading-[48px]`} style={{
+              <h2 className={`${poppins.className} text-[54px] leading-[48px]`} style={{
                 fontWeight: 700,
                 fontStyle: 'normal',
                 letterSpacing: '0px',
                 verticalAlign: 'middle',
-                color: '#000000'
+                color: '#008AD2'
               }}>
                 Partner with{" "}
-                <span style={{ color: '#4B5563' }}>HiLife</span>
+                <span style={{ color: '#AECB06' }}>HiLife</span>
               </h2>
             </div>
             <p
-              className={`${roboto.className} text-[20px] leading-[32.5px] tracking-[0] align-middle mt-12 text-left`}
+              className={`${poppins.className} text-[20px] leading-[32.5px] tracking-[0] align-middle mt-12 text-left`}
               style={{ color: "#374151" }}
             >
                 Join our expanding network and bring advanced medicated-support mattresses to your region. Experience the strength of a trusted sleep-wellness brand built on innovation, quality, and proven comfort.
@@ -50,8 +46,8 @@ export default function PartnerWith() {
                   </svg>
                 </div>
                 <div>
-                  <div className={`${robotoBold.className} text-[16px] leading-[24px]`} style={{ color: "#111827" }}> Strong Distribution Network</div>
-                  <div className={`${roboto.className} text-[14px] leading-[22px]`} style={{ color: "#6B7280" }}>Access to a reliable supply chain with fast delivery across South India.</div>
+                  <div className={`${poppins.className} text-[16px] leading-[24px]`} style={{ color: "#111827" }}> Strong Distribution Network</div>
+                  <div className={`${poppins.className} text-[14px] leading-[22px]`} style={{ color: "#6B7280" }}>Access to a reliable supply chain with fast delivery across South India.</div>
                 </div>
               </div>
 
@@ -62,8 +58,8 @@ export default function PartnerWith() {
                   </svg>
                 </div>
                 <div>
-                  <div className={`${robotoBold.className} text-[16px] leading-[24px]`} style={{ color: "#111827" }}>Premium Medicated Mattress Range</div>
-                  <div className={`${roboto.className} text-[14px] leading-[22px]`} style={{ color: "#6B7280" }}>Scientifically crafted mattresses for posture, pressure relief, and healthy sleep.</div>
+                  <div className={`${poppins.className} text-[16px] leading-[24px]`} style={{ color: "#111827" }}>Premium Medicated Mattress Range</div>
+                  <div className={`${poppins.className} text-[14px] leading-[22px]`} style={{ color: "#6B7280" }}>Scientifically crafted mattresses for posture, pressure relief, and healthy sleep.</div>
                 </div>
               </div>
 
@@ -76,8 +72,8 @@ export default function PartnerWith() {
                   </svg>
                 </div>
                 <div>
-                  <div className={`${robotoBold.className} text-[16px] leading-[24px]`} style={{ color: "#111827" }}>Complete Business Support</div>
-                  <div className={`${roboto.className} text-[14px] leading-[22px]`} style={{ color: "#6B7280" }}>Get onboarding, training, marketing materials, and continuous operational guidance.</div>
+                  <div className={`${poppins.className} text-[16px] leading-[24px]`} style={{ color: "#111827" }}>Complete Business Support</div>
+                  <div className={`${poppins.className} text-[14px] leading-[22px]`} style={{ color: "#6B7280" }}>Get onboarding, training, marketing materials, and continuous operational guidance.</div>
                 </div>
               </div>
 
@@ -89,14 +85,14 @@ export default function PartnerWith() {
                   </svg>
                 </div>
                 <div>
-                  <div className={`${robotoBold.className} text-[16px] leading-[24px]`} style={{ color: "#111827" }}>High Growth Potential</div>
-                  <div className={`${roboto.className} text-[14px] leading-[22px]`} style={{ color: "#6B7280" }}>Backed by strong brand reputation, repeat customer demand, and profitable product margins.</div>
+                  <div className={`${poppins.className} text-[16px] leading-[24px]`} style={{ color: "#111827" }}>High Growth Potential</div>
+                  <div className={`${poppins.className} text-[14px] leading-[22px]`} style={{ color: "#6B7280" }}>Backed by strong brand reputation, repeat customer demand, and profitable product margins.</div>
                 </div>
               </div>
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <button
-                className={`${robotoBold.className} text-white rounded-2xl py-4 px-8 border border-[#005480]`}
+                className={`${poppins.className} text-white rounded-2xl py-4 px-8 border border-[#005480]`}
                 style={{
                   background: 'linear-gradient(90deg, #006397 56.5%, #002031 100%)',
                 }}
@@ -104,7 +100,7 @@ export default function PartnerWith() {
                 Become a Dealer
               </button>
               <button
-                className={`${robotoBold.className} inline-flex items-center gap-2 rounded-2xl border border-black text-black py-[17px] px-[33px]`}
+                className={`${poppins.className} inline-flex items-center gap-2 rounded-2xl border border-black text-black py-[17px] px-[33px]`}
               >
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <path d="M12 3v12" />
@@ -127,8 +123,8 @@ export default function PartnerWith() {
                 />
               </div>
               <div className="absolute z-10 left-3 top-3 md:left-0 md:top-6 md:-translate-x-1/2 rounded-xl bg-white/95 px-4 py-3 shadow-lg">
-                <div className={`${robotoBold.className} text-[22px] leading-[28px]`} style={{ color: "#111827" }}>150+</div>
-                <div className={`${roboto.className} text-[12px] leading-[16px]`} style={{ color: "#6B7280" }}>Active Dealers</div>
+                <div className={`${poppins.className} text-[22px] leading-[28px]`} style={{ color: "#111827" }}>150+</div>
+                <div className={`${poppins.className} text-[12px] leading-[16px]`} style={{ color: "#6B7280" }}>Active Dealers</div>
               </div>
               <div 
                 className="absolute z-10 right-3 top-1/2 -translate-y-1/2 md:right-0 md:translate-x-1/2 rounded-xl text-white px-4 py-3 shadow-lg"
@@ -136,19 +132,19 @@ export default function PartnerWith() {
                   background: 'linear-gradient(90deg, #006397 56.5%, #002031 100%)',
                 }}
               >
-                <div className={`${robotoBold.className} text-[22px] leading-[28px]`}>$2M+</div>
-                <div className={`${roboto.className} text-[12px] leading-[16px] opacity-80`}>Dealer Revenue</div>
+                <div className={`${poppins.className} text-[22px] leading-[28px]`}>$2M+</div>
+                <div className={`${poppins.className} text-[12px] leading-[16px] opacity-80`}>Dealer Revenue</div>
               </div>
               <div className="absolute z-10 left-3 bottom-3 md:left-0 md:bottom-6 md:-translate-x-1/2 rounded-xl bg-white/95 px-4 py-3 shadow-lg">
-                <div className={`${robotoBold.className} text-[22px] leading-[28px]`} style={{ color: "#111827" }}>95%</div>
-                <div className={`${roboto.className} text-[12px] leading-[16px]`} style={{ color: "#6B7280" }}>Satisfaction</div>
+                <div className={`${poppins.className} text-[22px] leading-[28px]`} style={{ color: "#111827" }}>95%</div>
+                <div className={`${poppins.className} text-[12px] leading-[16px]`} style={{ color: "#6B7280" }}>Satisfaction</div>
               </div>
             </div>
           </div>
         </div>
         <div className="mt-16">
           <h3 
-            className={`${playfair.className} text-center`} 
+            className={`${poppins.className} text-center`} 
             style={{ 
               color: "#000000",
               fontWeight: 600,
@@ -166,31 +162,31 @@ export default function PartnerWith() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="flex flex-col items-center text-center gap-3">
                 <div className="z-10 h-12 w-12 rounded-2xl bg-[#008AD2] text-white flex items-center justify-center" style={{ boxShadow: "-1px 1px 3px 0px #000000AD, -6px 3px 6px 0px #00000096, -12px 7px 8px 0px #00000059, -22px 12px 10px 0px #0000001A, -34px 18px 11px 0px #00000003" }}>
-                  <span className={`${robotoBold.className}`}>01</span>
+                  <span className={`${poppins.className}`}>01</span>
                 </div>
-                <div className={`${robotoBold.className} text-[16px] leading-[24px]`} style={{ color: "#111827" }}>Apply</div>
-                <div className={`${roboto.className} text-[13px] leading-[20px] md:text-[14px] md:leading-[22px] max-w-[220px]`} style={{ color: "#6B7280" }}>Submit your partnership application online</div>
+                <div className={`${poppins.className} text-[16px] leading-[24px]`} style={{ color: "#111827" }}>Apply</div>
+                <div className={`${poppins.className} text-[13px] leading-[20px] md:text-[14px] md:leading-[22px] max-w-[220px]`} style={{ color: "#6B7280" }}>Submit your partnership application online</div>
               </div>
               <div className="flex flex-col items-center text-center gap-3">
                 <div className="z-10 h-12 w-12 rounded-2xl bg-[#008AD2] text-white flex items-center justify-center" style={{ boxShadow: "-1px 1px 3px 0px #000000AD, -6px 3px 6px 0px #00000096, -12px 7px 8px 0px #00000059, -22px 12px 10px 0px #0000001A, -34px 18px 11px 0px #00000003" }}>
-                  <span className={`${robotoBold.className}`}>02</span>
+                  <span className={`${poppins.className}`}>02</span>
                 </div>
-                <div className={`${robotoBold.className} text-[16px] leading-[24px]`} style={{ color: "#111827" }}>Review</div>
-                <div className={`${roboto.className} text-[13px] leading-[20px] md:text-[14px] md:leading-[22px] max-w-[220px]`} style={{ color: "#6B7280" }}>Our team evaluates your market potential</div>
+                <div className={`${poppins.className} text-[16px] leading-[24px]`} style={{ color: "#111827" }}>Review</div>
+                <div className={`${poppins.className} text-[13px] leading-[20px] md:text-[14px] md:leading-[22px] max-w-[220px]`} style={{ color: "#6B7280" }}>Our team evaluates your market potential</div>
               </div>
               <div className="flex flex-col items-center text-center gap-3">
                 <div className="z-10 h-12 w-12 rounded-2xl bg-[#008AD2] text-white flex items-center justify-center" style={{ boxShadow: "-1px 1px 3px 0px #000000AD, -6px 3px 6px 0px #00000096, -12px 7px 8px 0px #00000059, -22px 12px 10px 0px #0000001A, -34px 18px 11px 0px #00000003" }}>
-                  <span className={`${robotoBold.className}`}>03</span>
+                  <span className={`${poppins.className}`}>03</span>
                 </div>
-                <div className={`${robotoBold.className} text-[16px] leading-[24px]`} style={{ color: "#111827" }}>Training</div>
-                <div className={`${roboto.className} text-[13px] leading-[20px] md:text-[14px] md:leading-[22px] max-w-[220px]`} style={{ color: "#6B7280" }}>Comprehensive onboarding and brand training</div>
+                <div className={`${poppins.className} text-[16px] leading-[24px]`} style={{ color: "#111827" }}>Training</div>
+                <div className={`${poppins.className} text-[13px] leading-[20px] md:text-[14px] md:leading-[22px] max-w-[220px]`} style={{ color: "#6B7280" }}>Comprehensive onboarding and brand training</div>
               </div>
               <div className="flex flex-col items-center text-center gap-3">
                 <div className="z-10 h-12 w-12 rounded-2xl bg-[#008AD2] text-white flex items-center justify-center" style={{ boxShadow: "-1px 1px 3px 0px #000000AD, -6px 3px 6px 0px #00000096, -12px 7px 8px 0px #00000059, -22px 12px 10px 0px #0000001A, -34px 18px 11px 0px #00000003" }}>
-                  <span className={`${robotoBold.className}`}>04</span>
+                  <span className={`${poppins.className}`}>04</span>
                 </div>
-                <div className={`${robotoBold.className} text-[16px] leading-[24px]`} style={{ color: "#111827" }}>Launch</div>
-                <div className={`${roboto.className} text-[13px] leading-[20px] md:text-[14px] md:leading-[22px] max-w-[220px]`} style={{ color: "#6B7280" }}>Start selling with full support and resources</div>
+                <div className={`${poppins.className} text-[16px] leading-[24px]`} style={{ color: "#111827" }}>Launch</div>
+                <div className={`${poppins.className} text-[13px] leading-[20px] md:text-[14px] md:leading-[22px] max-w-[220px]`} style={{ color: "#6B7280" }}>Start selling with full support and resources</div>
               </div>
             </div>
           </div>
@@ -198,11 +194,11 @@ export default function PartnerWith() {
 
         <div className="mt-16">
           <div className="rounded-3xl bg-black text-white px-6 py-10 text-center">
-            <div className={`${risque.className} text-[24px] md:text-[28px]`}>Ready to Grow With HiLife?</div>
-            <div className={`${roboto.className} mt-2 text-[16px] leading-[24px] opacity-90`}>Join the HiLife family and become part of a mission to deliver healthier sleep across India. Start your journey with a brand trusted for quality, comfort, and medicated support technology.</div>
+            <div className={`${poppins.className} text-[24px] md:text-[28px]`}>Ready to Grow With HiLife?</div>
+            <div className={`${poppins.className} mt-2 text-[16px] leading-[24px] opacity-90`}>Join the HiLife family and become part of a mission to deliver healthier sleep across India. Start your journey with a brand trusted for quality, comfort, and medicated support technology.</div>
             <div className="mt-6">
               <button 
-                className={`${robotoBold.className} inline-flex items-center gap-2 rounded-2xl text-white py-3 px-6 border border-[#005480]`} 
+                className={`${poppins.className} inline-flex items-center gap-2 rounded-2xl text-white py-3 px-6 border border-[#005480]`} 
                 style={{ 
                   background: 'linear-gradient(90deg, #006397 56.5%, #002031 100%)',
                   boxShadow: '0px 16px 32px 0px rgba(255,255,255,0.55)' 

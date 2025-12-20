@@ -27,9 +27,9 @@ export default function ShopByCategories() {
     <MotionSection className="w-full px-6 py-12 md:py-16">
       <div className="max-w-5xl mx-auto text-center">
         <h2
-          className={`${playfair.className} font-semibold text-[40px] leading-[100%] bg-[linear-gradient(180deg,#AECB06_57.48%,#576503_69.82%)] bg-clip-text text-transparent`}
+          className={`${poppins.className} font-bold text-[40px] text-[#008AD2] bg-clip-text`}
         >
-          Shop By Categories
+          Shop By <span className="text-[#AECB06]">Categories</span>
         </h2>
         <p
           className={`${poppins.className} mt-4 text-[#6E6E6E] text-[20px] leading-[100%] font-medium`}
@@ -38,7 +38,7 @@ export default function ShopByCategories() {
         </p>
       </div>
       <div className="mx-auto mt-8 max-w-none">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8 xl:gap-10">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8 xl:gap-5">
           {categories.map((c) => (
             <Link key={c.title} href={c.href} className="group block">
               <div className="relative aspect-4/3 rounded-2xl overflow-hidden shadow-sm ring-1 ring-black/5">
@@ -49,15 +49,14 @@ export default function ShopByCategories() {
                 )}
                 <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent" />
                 <div className="absolute bottom-3 left-3 right-3">
-                  <div className={`${poppins.className} w-full text-center rounded-xl bg-white/80 text-gray-900 px-3 py-2 text-sm sm:text-base font-semibold shadow-sm`}>{c.title}</div>
+                  <div className={`${poppins.className} w-full text-center rounded-xl bg-white/80 text-gray-900 hover:text-[#008AD2] px-3 py-2 text-sm sm:text-base font-semibold shadow-sm`}>{c.title}</div>
                 </div>
               </div>
             </Link>
           ))}
         </div>
+
       </div>
     </MotionSection>
   );
 }
-
-

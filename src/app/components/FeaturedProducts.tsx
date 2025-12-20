@@ -5,14 +5,10 @@ import { MotionSection } from "./Motion";
 import { motion } from "framer-motion";
 import { staggerContainer, staggerItem } from "./Animate";
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600"],
-});
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["500"],
+  weight: ["600"],
 });
 
 const products = [
@@ -55,9 +51,9 @@ export default function FeaturedProducts() {
     <MotionSection id="products" className="w-full px-6 pt-6 md:pt-8 pb-12 md:pb-16 scroll-mt-28 md:scroll-mt-36">
       <div className="max-w-5xl mx-auto text-center">
         <h2
-          className={`${playfair.className} font-semibold text-[40px] leading-[100%] bg-[linear-gradient(180deg,#AECB06_57.48%,#576503_69.82%)] bg-clip-text text-transparent`}
+          className={`${poppins.className} font-bold text-[40px] leading-[100%]  bg-clip-text text-[#008AD2]`}
         >
-          Featured Products
+          Featured <span className="text-[#AECB06]">Products</span>
         </h2>
         <p
           className={`${poppins.className} mt-4 text-[#6E6E6E] text-[20px] leading-[100%] font-medium`}

@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, type MotionProps } from 'framer-motion'
+import { motion, type HTMLMotionProps } from 'framer-motion'
 import { fadeInProps } from './Animate'
 
 type CommonProps = {
@@ -10,7 +10,7 @@ type CommonProps = {
   children: React.ReactNode
 }
 
-export function MotionSection({ id, className, style, children, ...rest }: CommonProps & MotionProps) {
+export function MotionSection({ id, className, style, children, ...rest }: CommonProps & HTMLMotionProps<'section'>) {
   return (
     <motion.section id={id} className={className} style={style} {...fadeInProps} {...rest}>
       {children}
@@ -18,7 +18,7 @@ export function MotionSection({ id, className, style, children, ...rest }: Commo
   )
 }
 
-export function MotionDiv({ className, style, children, ...rest }: Omit<CommonProps, 'id'> & MotionProps) {
+export function MotionDiv({ className, style, children, ...rest }: Omit<CommonProps, 'id'> & HTMLMotionProps<'div'>) {
   return (
     <motion.div className={className} style={style} {...fadeInProps} {...rest}>
       {children}

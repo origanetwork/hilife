@@ -4,14 +4,10 @@ import { Playfair_Display, Poppins } from "next/font/google";
 import { motion } from "framer-motion";
 import { fadeInProps } from "./Animate";
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400"],
-});
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400","600"],
 });
 
 export default function About() {
@@ -33,9 +29,9 @@ export default function About() {
         {/* Right: Content */}
         <div className="lg:mt-20">
           <h2
-            className={`${playfair.className} font-normal text-[52px] leading-[100%] bg-[linear-gradient(180deg,#AECB06_57.48%,#576503_69.82%)] bg-clip-text text-transparent`}
+            className={`${poppins.className} font-bold text-[52px]  bg-clip-text text-[#008AD2] `}
           >
-            About us
+            About <span className="text-[#AECB06]">us</span>
           </h2>
 
           <p

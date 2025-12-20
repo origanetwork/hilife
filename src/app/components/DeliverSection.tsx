@@ -2,12 +2,6 @@ import Image from "next/image";
 import { Playfair_Display, Poppins } from "next/font/google";
 import { MotionSection } from "./Motion";
 
-const playfair = Playfair_Display({
-  weight: ["600"],
-  subsets: ["latin"],
-  style: ["normal"],
-  display: "swap",
-});
 
 const poppins = Poppins({
   weight: ["400"],
@@ -22,12 +16,7 @@ export default function DeliverSection() {
       <div className="w-full px-4 sm:px-6 pt-8 pb-10 md:pt-4 md:pb-6 lg:pt-2 lg:pb-4 min-h-[500px] md:min-h-[360px] lg:min-h-[280px] flex flex-col justify-center">
         <div className="mx-auto w-full max-w-5xl">
         <h2
-          className={`${playfair.className} text-white lg:mt-5 text-[36px] leading-[36px] text-center`}
-          style={{
-            fontWeight: 600,
-            fontStyle: "normal",
-            letterSpacing: "0px",
-          }}
+          className={`${poppins.className} text-white lg:mt-5 text-[36px]  text-center`}
         >
           Delivering Reliable Quality and Service Across the Region
         </h2>

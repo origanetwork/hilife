@@ -1,23 +1,22 @@
 'use client'
 
 import Image from 'next/image'
-import { Playfair_Display, Poppins } from 'next/font/google'
+import {  Poppins } from 'next/font/google'
 import { MotionSection } from './Motion'
 
-const playfair = Playfair_Display({ weight: ['600'], subsets: ['latin'], display: 'swap' })
 const poppins = Poppins({ weight: ['400','500','600'], subsets: ['latin'], display: 'swap' })
 
 export default function ContactUs() {
   return (
     <MotionSection id="contact" className="w-full px-4 md:px-6 lg:px-8 py-16 md:py-20 scroll-mt-28 md:scroll-mt-36">
       <div className="w-full text-center">
-        <h2 className={`${playfair.className} font-semibold text-[32px] md:text-[40px] leading-[100%] bg-[linear-gradient(180deg,#AECB06_57.48%,#576503_69.82%)] bg-clip-text text-transparent`}>
-          Contact Us
+        <h2 className={`${poppins.className} font-semibold text-[32px] md:text-[40px] text-[#AECB06] `}>
+          Contact <span className='text-[#008AD2]'>Us</span> 
         </h2>
       </div>
 
       <div className="mt-10 md:mt-12">
-        <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-[0_6px_28px_rgba(0,0,0,0.15)] overflow-hidden">
+        <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-[0_6px_28px_rgba(0,0,0,0.15)] overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-5">
             <div className="relative md:col-span-2 bg-[#011C2B] text-white p-7 sm:p-8 md:p-9 lg:p-10 pb-24 md:pb-10">
               <div className={`${poppins.className}`}>

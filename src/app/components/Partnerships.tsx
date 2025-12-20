@@ -3,14 +3,10 @@ import { useEffect, useRef } from "react";
 import { Playfair_Display, Poppins } from "next/font/google";
 import { MotionSection } from "./Motion";
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["600"],
-});
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["500"],
+  weight: ["600","500"],
 });
 
 export default function Partnerships() {
@@ -33,12 +29,12 @@ export default function Partnerships() {
     return () => clearInterval(id);
   }, []);
   return (
-    <MotionSection className="w-full mt-6 md:mt-0 lg:mt-30 px-6 pt-0 md:pt-0 pb-10 md:pb-14">
-      <div className="max-w-6xl mx-auto text-center">
+    <MotionSection className="w-full mt-6 lg:mt-[120px] px-6 pt-0 md:pt-0 pb-10 md:pb-14">
+      <div className="max-w-6xl sm:mt-10 mx-auto text-center">
         <h2
-          className={`${playfair.className} font-semibold text-[40px] leading-[100%] bg-[linear-gradient(180deg,#AECB06_57.48%,#576503_69.82%)] bg-clip-text text-transparent lg:whitespace-nowrap`}
+          className={`${poppins.className} font-bold text-[40px]   bg-clip-text text-[#008AD2] `}
         >
-          Trusted Partnerships That Strengthen Our Commitment to Quality
+          Trusted Partnerships That Strengthen Our Commitment <span className="text-[#AECB06]"> to Quality</span>
         </h2>
         <p
           className={`${poppins.className} mt-4 text-[#6E6E6E] text-[20px] leading-[100%] font-medium`}
