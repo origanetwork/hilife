@@ -9,7 +9,7 @@ const poppins = Poppins({ weight: ['400','500','600'], subsets: ['latin'], displ
 export default function ContactUs() {
   return (
     <MotionSection id="contact" className="w-full px-4 md:px-6 lg:px-8 py-16 md:py-20 scroll-mt-28 md:scroll-mt-36">
-      <div className="w-full text-center">
+      <div className="max-w-7xl mx-auto lg:mt-10">
         <h2 className={`${poppins.className} font-semibold text-[32px] md:text-[40px] text-[#AECB06] `}>
           Contact <span className='text-[#008AD2]'>Us</span> 
         </h2>
