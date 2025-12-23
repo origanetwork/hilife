@@ -24,6 +24,7 @@
   box-shadow: none;
   -webkit-tap-highlight-color: transparent;
 }
+
 .glass-toolbar button:focus,
 .glass-toolbar button:focus-visible {
   outline: none;
@@ -36,11 +37,17 @@ html {
 }
 
 /* Prevent horizontal scroll/white strip on mobile */
-html, body {
+html {
   max-width: 100%;
   overflow-x: hidden;
 }
+
+body {
+  max-width: 100%;
+}
+
 /* Ensure root container cannot overflow horizontally */
-#__next, body > div:first-child {
+#__next,
+body>div:first-child {
   overflow-x: hidden;
 }
