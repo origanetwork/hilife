@@ -31,7 +31,7 @@ export default async function ProductDetailPage({ params }: Params) {
               ← Back to Products
             </a>
           </div>
-          <h1 className={`${playfair.className} text-[28px] md:text-[36px] font-semibold text-[#101828]`}>{product.title}</h1>
+          <h1 className={`${poppins.className} text-[28px] md:text-[36px] font-semibold text-[#101828]`}>{product.title}</h1>
           <p className={`${poppins.className} mt-1 text-[#6E6E6E]`}>{product.category}</p>
 
           <div className="mt-6">

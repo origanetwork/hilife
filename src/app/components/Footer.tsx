@@ -1,9 +1,11 @@
 import Image from "next/image";
-import { Playfair_Display, Poppins } from "next/font/google";
+import { 
+  // Playfair_Display,
+   Poppins } from "next/font/google";
 import { MotionSection } from "./Motion";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaWhatsapp } from "react-icons/fa";
 
-const playfair = Playfair_Display({ weight: ["600"], subsets: ["latin"], display: "swap" });
+// const playfair = Playfair_Display({ weight: ["600"], subsets: ["latin"], display: "swap" });
 const poppins = Poppins({ weight: ["400", "500", "600"], subsets: ["latin"], display: "swap" });
 
 const columns = [
@@ -11,10 +13,10 @@ const columns = [
     title: "Mattresses",
     links: [
       "OrthoSupreme",
-      "CloudComfort Memory",
       "HybridLuxe Pro",
       "Original mattress",
       "Hybrid Mattress",
+      "CloudComfort Memory",
       "Memory foam mattress",
       "All Mattresses",
     ],
@@ -37,92 +39,136 @@ const columns = [
   },
 ];
 
+const socialMedia = [
+  {
+    name: "Facebook",
+    icon: FaFacebookF,
+    color: "hover:bg-[#1877F2] hover:text-white",
+    label: "Follow us on Facebook"
+  },
+  {
+    name: "Instagram",
+    icon: FaInstagram,
+    color: "hover:bg-gradient-to-r hover:from-[#833AB4] hover:via-[#FD1D1D] hover:to-[#FCB045] hover:text-white",
+    label: "Follow us on Instagram"
+  },
+  {
+    name: "WhatsApp",
+    icon: FaWhatsapp,
+    color: "hover:bg-[#25D366] hover:text-white",
+    label: "Chat with us on WhatsApp"
+  },
+  {
+    name: "Twitter",
+    icon: FaTwitter,
+    color: "hover:bg-[#1DA1F2] hover:text-white",
+    label: "Follow us on Twitter"
+  },
+  // {
+  //   name: "YouTube",
+  //   icon: FaYoutube,
+  //   color: "hover:bg-[#FF0000] hover:text-white",
+  //   label: "Subscribe to our YouTube channel"
+  // },
+  {
+    name: "LinkedIn",
+    icon: FaLinkedinIn,
+    color: "hover:bg-[#0077B5] hover:text-white",
+    label: "Follow us on LinkedIn"
+  },
+];
+
+
 export default function Footer() {
   return (
     <MotionSection
-      className="mt-16 text-white rounded-tl-[56px] md:rounded-tl-[96px] overflow-hidden"
+      className="mt-16 text-white rounded-tl-[40px] md:rounded-tl-[96px] overflow-hidden"
       style={{ background: "linear-gradient(136.02deg, #000000 42.64%, #A0A0A0 81.82%)" }}
     >
-      <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-4 py-12 md:py-12">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
-          {/* Brand and blurb */}
-          <div className="md:col-span-3">
-            <Image src="/assets/logo/logo-hilife.png" alt="Hi Life logo" width={260} height={72} className="h-16 md:h-36 w-auto " />
-            <p className={`${poppins.className} mt-3 text-sm text-white/80`}>
+      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-14 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          {/* Brand Section */}
+          <div className="lg:col-span-3 text-left justify-start">
+            <Image
+              src="/assets/logo/logo-hilife.png"
+              alt="Hi Life logo"
+              width={260}
+              height={72}
+              className="mx-auto lg:mx-0 h-28 md:h-28 w-auto"
+            />
+
+            <p className={`${poppins.className} mt-4 text-sm text-white/80`}>
               Premium medicated mattresses for healthier sleep and better living.
             </p>
-            <div className="mt-6">
-              <div className={`${poppins.className} text-white text-[18px] font-semibold mb-4`}>Social</div>
-              <div className="flex items-center gap-8 text-white/90">
-                <a aria-label="Facebook" href="#" className="inline-flex h-8 w-8 aspect-square items-center justify-center rounded-full bg-white/10 hover:bg-white/20">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor"><path d="M13.5 10H16l.5-3h-3V5.5a1 1 0 0 1 1-1H16V2h-2.5A3.5 3.5 0 0 0 10 5.5V7H8v3h2v9h3v-9Z"/></svg>
-                </a>
-                <a aria-label="Instagram" href="#" className="inline-flex h-8 w-8 aspect-square items-center justify-center rounded-full bg-white/10 hover:bg-white/20">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm5 4a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6-.25a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/></svg>
-                </a>
-                <a aria-label="WhatsApp" href="#" className="inline-flex h-8 w-8 aspect-square items-center justify-center rounded-full bg-white/10 hover:bg-white/20">
-                  <FaWhatsapp size={18} />
-                </a>
-                <a aria-label="Twitter" href="#" className="inline-flex h-8 w-8 aspect-square items-center justify-center rounded-full bg-white/10 hover:bg-white/20">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor"><path d="M22 5.92c-.73.33-1.52.55-2.35.65a4.12 4.12 0 0 0 1.8-2.28 8.26 8.26 0 0 1-2.61 1 4.11 4.11 0 0 0-7 3.75 11.64 11.64 0 0 1-8.45-4.28 4.11 4.11 0 0 0 1.27 5.48c-.63-.02-1.22-.19-1.73-.47v.05a4.11 4.11 0 0 0 3.3 4.03c-.29.08-.59.12-.9.12-.22 0-.43-.02-.63-.06a4.12 4.12 0 0 0 3.84 2.85A8.25 8.25 0 0 1 2 18.58 11.65 11.65 0 0 0 8.29 20.5c7.55 0 11.68-6.26 11.68-11.68l-.01-.53A8.35 8.35 0 0 0 22 5.92Z"/></svg>
-                </a>
-                <a aria-label="YouTube" href="#" className="inline-flex h-8 w-8 aspect-square items-center justify-center rounded-full bg-white/10 hover:bg-white/20">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
-                    <path d="M2.5 6.5A3.5 3.5 0 0 1 6 3h12a3.5 3.5 0 0 1 3.5 3.5v7A3.5 3.5 0 0 1 18 17H6a3.5 3.5 0 0 1-3.5-3.5Z"/>
-                    <path d="m10 8 6 4-6 4Z"/>
-                  </svg>
-                </a>
-                
 
-                <div className="hidden md:block mx-3 h-6 w-px bg-white/20" />
+            {/* Social */}
+            <div className="mt-6">
+              <div className={`${poppins.className} text-lg font-semibold mb-4`}>
+                Social
               </div>
-                <div className="lg:mt-5 hidden md:flex items-center gap-6 whitespace-nowrap">
-                  <div className="inline-flex items-center gap-2">
-                    <Image src="/assets/footer/c1.png" alt="Certification 1" width={96} height={48} className="h-8 md:h-10 w-auto shrink-0" />
-                    <span className={`${poppins.className} text-xs text-white/70 whitespace-nowrap`}>ISO 9001</span>
-                  </div>
-                  <div className="inline-flex items-center gap-2">
-                    <Image src="/assets/footer/c2.png" alt="Certification 2" width={86} height={48} className="h-6 md:h-8 w-auto shrink-0" />
-                    <span className={`${poppins.className} text-xs text-white/70 whitespace-nowrap`}>BIS Certified</span>
-                  </div>
+
+              <div className="flex flex-wrap justify-start gap-2">
+                {socialMedia.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <a
+                      key={social.name}
+                      href="#"
+                      aria-label={social.label}
+                      className={`inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-all duration-300 transform hover:scale-110 ${social.color}`}
+                      title={social.name}
+                    >
+                      <Icon size={18} />
+                    </a>
+                  );
+                })}
+              </div>
+
+              {/* Certifications */}
+              <div className="mt-6 flex :justify-start gap-6">
+                <div className="flex items-center gap-2">
+                  <Image src="/assets/footer/c1.png" alt="ISO 9001" width={96} height={48} className="h-8 w-auto" />
+                  <span className={`${poppins.className} text-xs text-white/70`}>
+                    ISO 9001
+                  </span>
                 </div>
+                <div className="flex items-center gap-2">
+                  <Image src="/assets/footer/c2.png" alt="BIS Certified" width={86} height={48} className="h-7 w-auto" />
+                  <span className={`${poppins.className} text-xs text-white/70`}>
+                    BIS Certified
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Link columns */}
-          <div className="md:col-span-7 lg:ml-20 lg:mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-10 lg:gap-24">
-            {columns.map((col) => (
-              <div key={col.title}>
-                <div className={`${poppins.className} text-white text-[18px] font-semibold mb-4`}>{col.title}</div>
-                <ul className={`${poppins.className} space-y-3  md:space-y-4 text-sm leading-6 text-white/80`}>
-                  {col.links.map((l) => (
-                    <li key={l}>
-                      {l === "CloudComfort Memory" ? (
-                        <a href="#" className="hover:text-white">
-                          <span className="md:hidden whitespace-nowrap">{l}</span>
-                          <span className="hidden md:block leading-tight">
-                            <span className="block">CloudComfort</span>
-                            <span className="block font-extrabold text-black">Memory</span>
-                          </span>
-                        </a>
-                      ) : (
-                        <a href="#" className="hover:text-white whitespace-nowrap">
+          {/* Links Section */}
+          <div className="lg:col-span-9">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+              {columns.map((col) => (
+                <div key={col.title}>
+                  <div className={`${poppins.className} text-lg font-semibold mb-4`}>
+                    {col.title}
+                  </div>
+                  <ul className={`${poppins.className} space-y-3 text-sm text-white/80`}>
+                    {col.links.map((l) => (
+                      <li key={l}>
+                        <a href="#" className="hover:text-white transition whitespace-nowrap">
                           {l}
                         </a>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-
-            {/* Social moved below brand blurb */}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
 
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-10 border-t border-white/20 pt-5 text-center text-sm text-white/80">
+        {/* Bottom Bar */}
+        <div className="mt-12 border-t border-white/20 pt-5 text-center text-sm text-white/70">
           © {new Date().getFullYear()} Hilife Mattress | All Rights Reserved
         </div>
       </div>
