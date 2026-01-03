@@ -1,6 +1,9 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
-import { Risque, Roboto, Playfair_Display, Poppins } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { MotionSection } from "./Motion";
+import DealerEnquiryModal from "./DealerEnquiryModal";
 
 
 const poppins = Poppins({
@@ -9,7 +12,10 @@ const poppins = Poppins({
 });
 
 export default function PartnerWith() {
+  const [open, setOpen] = useState(false);
+
   return (
+    <>
     <MotionSection
       id="partner"
       className="w-full lg:mt-10"
@@ -18,7 +24,7 @@ export default function PartnerWith() {
         <div className="grid md:grid-cols-2 items-start gap-8">
           <div className="md:col-start-1">
             <div className="text-left">
-              <h2 className={`${poppins.className} text-[54px] leading-[48px]`} style={{
+              <span className={`${poppins.className} text-4xl md:text-4xl lg:text-5xl`} style={{
                 fontWeight: 700,
                 fontStyle: 'normal',
                 letterSpacing: '0px',
@@ -26,18 +32,18 @@ export default function PartnerWith() {
                 color: '#008AD2'
               }}>
                 Partner with{" "}
-                <span style={{ color: '#AECB06' }}>HiLife</span>
-              </h2>
+                <span className="text-4xl md:text-4xl lg:text-5xl" style={{ color: '#AECB06' }}>HiLife</span>
+              </span>
             </div>
             <p
-              className={`${poppins.className} text-[20px] leading-[32.5px] tracking-[0] align-middle mt-12 text-left`}
+              className={`${poppins.className} text-[18px] leading-[32.5px] tracking-[0] align-middle mt-6 text-left`}
               style={{ color: "#374151" }}
             >
                 Join our expanding network and bring advanced medicated-support mattresses to your region. Experience the strength of a trusted sleep-wellness brand built on innovation, quality, and proven comfort.
             </p>
             <div className="mt-6 space-y-5">
               <div className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-xl bg-[#008AD2] text-white flex items-center justify-center" style={{ boxShadow: "-1px 1px 3px 0px #000000AD, -6px 3px 6px 0px #00000096, -12px 7px 8px 0px #00000059, -22px 12px 10px 0px #0000001A, -34px 18px 11px 0px #00000003" }}>
+                <div className="rounded-xl p-1 bg-[#008AD2] text-white flex items-center justify-center" style={{ boxShadow: "-1px 1px 3px 0px #000000AD, -6px 3px 6px 0px #00000096, -12px 7px 8px 0px #00000059, -22px 12px 10px 0px #0000001A, -34px 18px 11px 0px #00000003" }}>
                   <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                     <circle cx="12" cy="12" r="9" />
                     <path d="M3 12h18" />
@@ -52,7 +58,7 @@ export default function PartnerWith() {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-xl bg-[#008AD2] text-white flex items-center justify-center" style={{ boxShadow: "-1px 1px 3px 0px #000000AD, -6px 3px 6px 0px #00000096, -12px 7px 8px 0px #00000059, -22px 12px 10px 0px #0000001A, -34px 18px 11px 0px #00000003" }}>
+                <div className="rounded-xl p-1 bg-[#008AD2] text-white flex items-center justify-center" style={{ boxShadow: "-1px 1px 3px 0px #000000AD, -6px 3px 6px 0px #00000096, -12px 7px 8px 0px #00000059, -22px 12px 10px 0px #0000001A, -34px 18px 11px 0px #00000003" }}>
                   <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                     <path d="M12 2l2.39 4.84 5.34.78-3.86 3.76.91 5.31L12 14.9l-4.78 2.79.91-5.31L4.27 7.62l5.34-.78L12 2z" />
                   </svg>
@@ -64,7 +70,7 @@ export default function PartnerWith() {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-xl bg-[#008AD2] text-white flex items-center justify-center" style={{ boxShadow: "-1px 1px 3px 0px #000000AD, -6px 3px 6px 0px #00000096, -12px 7px 8px 0px #00000059, -22px 12px 10px 0px #0000001A, -34px 18px 11px 0px #00000003" }}>
+                <div className="rounded-xl p-1 bg-[#008AD2] text-white flex items-center justify-center" style={{ boxShadow: "-1px 1px 3px 0px #000000AD, -6px 3px 6px 0px #00000096, -12px 7px 8px 0px #00000059, -22px 12px 10px 0px #0000001A, -34px 18px 11px 0px #00000003" }}>
                   <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                     <path d="M6 8v8a2 2 0 0 0 2 2h8" />
                     <path d="M18 14v-4a2 2 0 0 0-2-2H10" />
@@ -78,7 +84,7 @@ export default function PartnerWith() {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-xl bg-[#008AD2] text-white flex items-center justify-center" style={{ boxShadow: "-1px 1px 3px 0px #000000AD, -6px 3px 6px 0px #00000096, -12px 7px 8px 0px #00000059, -22px 12px 10px 0px #0000001A, -34px 18px 11px 0px #00000003" }}>
+                <div className="rounded-xl p-1 bg-[#008AD2] text-white flex items-center justify-center" style={{ boxShadow: "-1px 1px 3px 0px #000000AD, -6px 3px 6px 0px #00000096, -12px 7px 8px 0px #00000059, -22px 12px 10px 0px #0000001A, -34px 18px 11px 0px #00000003" }}>
                   <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                     <path d="M3 17l6-6 4 4 7-7" />
                     <path d="M14 4h7v7" />
@@ -90,28 +96,9 @@ export default function PartnerWith() {
                 </div>
               </div>
             </div>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <button
-                className={`${poppins.className} text-white rounded-2xl py-4 px-8 border border-[#005480]`}
-                style={{
-                  background: 'linear-gradient(90deg, #006397 56.5%, #002031 100%)',
-                }}
-              >
-                Become a Dealer
-              </button>
-              <button
-                className={`${poppins.className} inline-flex items-center gap-2 rounded-2xl border border-black text-black py-[17px] px-[33px]`}
-              >
-                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                  <path d="M12 3v12" />
-                  <path d="M8 11l4 4 4-4" />
-                  <path d="M5 21h14" />
-                </svg>
-                Download Brochure
-              </button>
-            </div>
+            
           </div>
-          <div className="md:col-start-2">
+          <div className="flex flex-col-reverse md:flex-col md:col-start-2">
             <div className="relative h-64 sm:h-80 md:h-[320px]">
               <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)]">
                 <Image
@@ -139,6 +126,28 @@ export default function PartnerWith() {
                 <div className={`${poppins.className} text-[22px] leading-[28px]`} style={{ color: "#111827" }}>95%</div>
                 <div className={`${poppins.className} text-[12px] leading-[16px]`} style={{ color: "#6B7280" }}>Satisfaction</div>
               </div>
+            </div>
+
+            <div className="pb-6 lg:mt-18 flex justify-between w-full items-center gap-3">
+              <button
+                onClick={() => setOpen(true)}
+                className={`${poppins.className} text-white rounded-2xl py-4 w-full border border-[#005480] hover:brightness-110 transition-all`}
+                style={{
+                  background: 'linear-gradient(90deg, #006397 56.5%, #002031 100%)',
+                }}
+              >
+                Become a Dealer
+              </button>
+              <button
+                className={`${poppins.className} inline-flex items-center rounded-2xl border border-black text-black py-[17px] w-full justify-center hover:bg-gray-50 transition-all`}
+              >
+                {/* <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d="M12 3v12" />
+                  <path d="M8 11l4 4 4-4" />
+                  <path d="M5 21h14" />
+                </svg> */}
+                Download Brochure
+              </button>
             </div>
           </div>
         </div>
@@ -197,11 +206,12 @@ export default function PartnerWith() {
             <div className={`${poppins.className} text-[24px] md:text-[28px]`}>Ready to Grow With HiLife?</div>
             <div className={`${poppins.className} mt-2 text-[16px] leading-[24px] opacity-90`}>Join the HiLife family and become part of a mission to deliver healthier sleep across India. Start your journey with a brand trusted for quality, comfort, and medicated support technology.</div>
             <div className="mt-6">
-              <button 
-                className={`${poppins.className} inline-flex items-center gap-2 rounded-2xl text-white py-3 px-6 border border-[#005480]`} 
-                style={{ 
+              <button
+                onClick={() => setOpen(true)}
+                className={`${poppins.className} inline-flex items-center gap-2 rounded-2xl text-white py-3 px-6 border border-[#005480] hover:brightness-110 transition-all`}
+                style={{
                   background: 'linear-gradient(90deg, #006397 56.5%, #002031 100%)',
-                  boxShadow: '0px 16px 32px 0px rgba(255,255,255,0.55)' 
+                  boxShadow: '0px 16px 32px 0px rgba(255,255,255,0.55)'
                 }}>
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <rect x="3" y="11" width="18" height="10" rx="2" ry="2" />
@@ -214,5 +224,9 @@ export default function PartnerWith() {
         </div>
       </div>
     </MotionSection>
+
+    {/* Dealer Enquiry Modal */}
+    <DealerEnquiryModal open={open} onClose={() => setOpen(false)} />
+    </>
   );
 }

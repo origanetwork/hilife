@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { Poppins } from "next/font/google";
 import { products } from "./data";
 import EnquiryModal from "../components/EnquiryModal";
@@ -23,10 +24,26 @@ const options = [
 ];
 
 export default function ProductsClient() {
+  const searchParams = useSearchParams();
   const [enquiryFor, setEnquiryFor] = useState<{ id: string; title: string } | null>(null);
   const [open, setOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [sort, setSort] = useState<"price-asc" | "price-desc" | "newest">("newest");
+
+  // Set active category from URL parameter and scroll to grid
+  useEffect(() => {
+    const categoryParam = searchParams.get("category");
+    if (categoryParam) {
+      setActiveCategory(categoryParam);
+      // Scroll to the grid section
+      setTimeout(() => {
+        const gridSection = document.getElementById("grid");
+        if (gridSection) {
+          gridSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 100);
+    }
+  }, [searchParams]);
 
   const fmt = useMemo(
     () =>

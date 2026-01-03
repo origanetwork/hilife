@@ -22,6 +22,10 @@ export const products: Product[] = [
   { id: "p10", title: "EcoSwitch Series", category: "Foldable Mattresses", image: "/assets/products/10.webp", tags: ["Portable", "Space Saving"], rating: 4.2, price: 7999, createdAt: "2025-02-15" },
   { id: "p11", title: "Premium M Mattress", category: "Mattresses", image: "/assets/products/M.png", tags: ["Orthopedic Support", "Breathable", "Durable"], rating: 4.7, price: 28999, createdAt: "2024-12-22" },
   { id: "p12", title: "Premium F Mattress", category: "Mattresses", image: "/assets/products/F.png", tags: ["Memory Foam", "Pressure Relief", "Cooling"], rating: 4.6, price: 30999, createdAt: "2025-02-20" },
+  { id: "p13", title: "Mattress Protector Premium", category: "Accessories", image: "/assets/products/1.jpg", tags: ["Waterproof", "Breathable", "Machine Washable"], rating: 4.5, price: 1499, createdAt: "2025-01-05" },
+  { id: "p14", title: "Bedsheet Set Cotton", category: "Accessories", image: "/assets/products/2.jpg", tags: ["100% Cotton", "Soft", "Durable"], rating: 4.7, price: 2999, createdAt: "2024-12-15" },
+  { id: "p15", title: "Blanket Fleece Warm", category: "Accessories", image: "/assets/products/3.avif", tags: ["Warm", "Soft", "Lightweight"], rating: 4.6, price: 1999, createdAt: "2024-11-20" },
+  { id: "p16", title: "Mattress Topper Memory Foam", category: "Accessories", image: "/assets/products/4.jpg", tags: ["Extra Comfort", "Pressure Relief"], rating: 4.8, price: 5999, createdAt: "2025-02-10" },
 ];
 
 export function getProduct(id: string) {

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Playfair_Display } from "next/font/google";
+import { Playfair_Display, Poppins } from "next/font/google";
 import Header from "./Header";
 import { motion } from "framer-motion";
 import { fadeInProps } from "./Animate";
@@ -12,8 +12,13 @@ const playfair = Playfair_Display({
   weight: ["600", "700"],
 });
 
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+});
+
 export default function Hero() {
-  const images = ["/assets/Hero/Left.png","/assets/products/b2.jpg","/assets/products/2.jpg"]; 
+  const images = ["/assets/Hero/banner-1.png","/assets/Hero/banner-2.jpg","/assets/Hero/banner-3.jpg", "/assets/Hero/banner-4.png"]; 
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -31,7 +36,7 @@ export default function Hero() {
         {/* Blue layer to fill the rounded top-right cutout of the left image */}
         <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-[62%] bg-[#008AD2] hidden md:block" />
         {/* Left: Photo with large bottom-left radius */}
-        <div className="relative z-10 h-[420px] sm:h-[500px] md:h-[640px] overflow-hidden rounded-bl-[96px] md:rounded-bl-[144px] rounded-tr-[72px] md:rounded-tr-[128px]">
+        <div className="relative z-10 h-[420px] sm:h-[500px] md:h-[640px] overflow-hidden md:rounded-bl-[144px] rounded-tr-[72px] md:rounded-tr-[128px]">
           {images.map((src, i) => (
             <motion.div
               key={`${src}-${i}`}
@@ -80,8 +85,8 @@ export default function Hero() {
         </div>
 
         {/* Right: Blue panel with headline + CTA */}
-        <motion.div {...fadeInProps} className="relative z-10 flex flex-col justify-center gap-6 bg-[#008AD2] px-6 md:px-10 pt-10 md:pt-36 lg:pt-40 pb-10 rounded-tr-[40px] md:rounded-tr-[56px]">
-          <motion.h1 {...fadeInProps} className={`${playfair.className} uppercase text-white text-[34px] sm:text-[40px] md:text-[52px] leading-[111%] font-semibold`}>
+        <motion.div {...fadeInProps} className="relative z-10 flex flex-col justify-center gap-6 bg-[#008AD2] px-6 md:px-10 pt-10 md:pt-36 lg:pt-40 pb-10 rounded-bl-[50px] ">
+          <motion.h1 {...fadeInProps} className={`${poppins.className} uppercase text-white text-[34px] sm:text-[40px] md:text-[52px] leading-[111%] font-semibold`}>
             Sleep Like <br /> You’re Floating <br /> on Clouds
           </motion.h1>
 

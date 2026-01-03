@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Playfair_Display, Poppins } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { MotionSection } from "./Motion";
 import { motion } from "framer-motion";
 import { staggerContainer, staggerItem } from "./Animate";
@@ -13,34 +13,34 @@ const poppins = Poppins({
 
 const products = [
   {
-    title: "ORTHOPEDIC",
+    title: "ELEGENT (MEDICAL)",
     image: "/assets/products/O.jpg",
     rating: 4.7,
-    desc: "Firm support mattresses engineered to relieve back and provide restful sleep.",
+    desc: "Special mattresses designed to relieve back pain, made with high-density rebonded foam and super-soft foam, and covered in high-quality knitted fabric with protection against fungus, bacteria, and dust mites.",
     price: "₹ 21,332",
     mrp: "₹ 21,332",
   },
   {
-    title: "FOLDABLE",
+    title: "DELUXE MEMORY",
     image: "/assets/products/F.png",
     rating: 4.6,
-    desc: "Convenient foldable design for easy storage and versatile comfort anywhere.",
+    desc: "These series mattresses are made with high-density rebonded foam, super-soft foam, and memory foam, featuring high-quality knitted fabric with protection against fungus, bacteria, and dust mites to help relieve persistent back pain.",
     price: "₹ 15,499",
     mrp: "₹ 18,999",
   },
   {
-    title: "FOLDABLE PRO",
+    title: "PREMIUM (MEDICAL)",
     image: "/assets/products/F (2).png",
     rating: 4.8,
-    desc: "Premium foldable mattress with enhanced cushioning and durable build.",
+    desc: "These series mattresses are made with high-density rebonded foam, super-soft foam, and memory foam, featuring high-quality knitted fabric with protection against fungus, bacteria, and dust mites to help relieve persistent back pain.",
     price: "₹ 19,999",
     mrp: "₹ 23,499",
   },
   {
-    title: "MATTRESS",
+    title: "LATEX",
     image: "/assets/products/M.png",
     rating: 4.7,
-    desc: "Balanced comfort and support tailored for everyday rejuvenating sleep.",
+    desc: "These series mattresses are made from natural latex sourced from the rubber tree Hevea brasiliensis, free from harmful chemicals. They offer a soft initial feel, adaptive body support, and proper spinal alignment for excellent back support.",
     price: "₹ 24,990",
     mrp: "₹ 29,990",
   },
@@ -48,15 +48,15 @@ const products = [
 
 export default function FeaturedProducts() {
   return (
-    <MotionSection id="products" className="w-full px-6 pt-6 md:pt-8 pb-12 md:pb-16 scroll-mt-28 md:scroll-mt-36">
+    <MotionSection id="products" className="w-full px-6 pt-2 md:pt-8 pb-12 md:pb-16 scroll-mt-28 md:scroll-mt-36">
       <div className="max-w-5xl mx-auto text-center">
-        <h2
-          className={`${poppins.className} font-bold text-[40px] leading-[100%]  bg-clip-text text-[#008AD2]`}
+        <span
+          className={`${poppins.className} text-3xl md:text-3xl lg:text-4xl font-bold leading-[100%]  bg-clip-text text-[#008AD2]`}
         >
-          Featured <span className="text-[#AECB06]">Products</span>
-        </h2>
+          Featured <span className="text-3xl md:text-3xl lg:text-4xl text-[#AECB06]">Products</span>
+        </span>
         <p
-          className={`${poppins.className} mt-4 text-[#6E6E6E] text-[20px] leading-[100%] font-medium`}
+          className={`${poppins.className} mt-4 text-[#6E6E6E] text-md md:text-lg leading-tight font-medium`}
         >
           Upgrade your sleep instantly with our best-selling, highly recommended featured products.
         </p>
@@ -67,7 +67,7 @@ export default function FeaturedProducts() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="flex gap-4 overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 lg:gap-8 sm:overflow-visible"
+          className="flex gap-4 overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-5 sm:overflow-visible"
         >
           {products.map((p) => (
             <motion.div
@@ -87,7 +87,7 @@ export default function FeaturedProducts() {
               </div>
               <div className="p-4">
                 <div className="flex items-center justify-between">
-                  <h3 className={`${poppins.className} uppercase text-[12px] sm:text-[13px] font-semibold text-gray-700`}>
+                  <h3 className={`${poppins.className} uppercase text-2xl sm:text-[13px] font-semibold text-gray-700`}>
                     {p.title}
                   </h3>
                   <div className="flex items-center gap-1 text-[13px] font-semibold text-gray-800">
@@ -97,7 +97,7 @@ export default function FeaturedProducts() {
                     <span>{p.rating}</span>
                   </div>
                 </div>
-                <p className="mt-2 text-[13px] text-gray-600">
+                <p className={`${poppins.className} mt-2 text-[12px] font-light text-gray-400`}>
                   {p.desc}
                 </p>
                 <div className="mt-4 flex items-baseline gap-3">

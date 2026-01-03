@@ -48,14 +48,6 @@ export default function About() {
                 </li>
               </ul>
             </div>
-
-            <button
-              type="button"
-              className={`${poppins.className} mt-6 md:mt-8 w-full sm:w-auto px-6 py-3.5 text-sm sm:text-base font-medium rounded-xl bg-linear-to-r from-[#006397] to-[#002031] text-white shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center space-x-2`}
-            >
-              <span>Know More</span>
-              <span className="inline-block transform transition-transform group-hover:translate-x-1">→</span>
-            </button>
           </div>
           
           {/* Image Container */}

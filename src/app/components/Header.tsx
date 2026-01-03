@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { FiShoppingCart, FiPhone, FiUser, FiMenu, FiX } from "react-icons/fi";
+import { Poppins } from "next/font/google";
 
 // Navigation links array
 const navLinks = [
@@ -16,6 +17,11 @@ const navLinks = [
   { name: "Contact Us", href: "/contact" },
 ];
 
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+});
+
 export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -23,7 +29,7 @@ export default function Header() {
 
   return (
     <header className="absolute inset-x-0 top-0 z-50 w-full">
-      <div className="mx-auto flex items-center justify-between md:justify-around gap-6 px-6 py-3 md:py-8">
+      <div className={`${poppins.className} mx-auto flex items-center justify-between md:justify-around gap-6 px-6 py-3 md:py-8`}>
         {/* Logo */}
         <Link href="/" className="shrink-0">
           <Image

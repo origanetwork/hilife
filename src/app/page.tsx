@@ -4,7 +4,7 @@ import FeaturedProducts from "./components/FeaturedProducts";
 import InsightSection from "./components/InsightSection";
 import Testimonial from "./components/Testimonial";
 import About from "./components/About";
-import Partnerships from "./components/Partnerships";
+// import Partnerships from "./components/Partnerships";
 import PartnerWith from "./components/Partnerwith";
 import DeliverSection from "./components/DeliverSection";
 import ContactUs from "./components/ContactUs";
@@ -17,7 +17,7 @@ export default function Home() {
       <ShopByCategories />
       <FeaturedProducts />
       <About />
-      <Partnerships />
+      {/* <Partnerships /> */}
       <PartnerWith />
       <DeliverSection />
       <InsightSection />

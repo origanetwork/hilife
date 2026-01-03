@@ -42,7 +42,7 @@ export default function BlogPage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
-            className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+            className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
           >
             {posts.map((p) => (
               <MotionDiv

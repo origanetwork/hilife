@@ -83,18 +83,18 @@ export default function Testimonial() {
   }, []);
 
   return (
-    <MotionSection className="w-full px-4 md:px-6 lg:px-8 py-16 md:py-20">
+    <MotionSection className="w-full px-4 md:px-6 lg:px-8 py-8 lg:pb-10">
       <div className="w-full text-center">
-        <h2
-          className={`${poppins.className} font-semibold text-[32px] md:text-[40px] text-[#008AD2]`}
+        <span
+          className={`${poppins.className} font-semibold text-3xl md:text-3xl lg:text-4xl text-[#008AD2]`}
         >
-          What our clients say about us.
-        </h2>
+          What our clients say <span className="text-3xl md:text-3xl lg:text-4xl text-[#AECB06]">about us</span>
+        </span>
       </div>
 
       <div className="mt-10 md:mt-12">
         {/* Mobile carousel */}
-        <div className="md:hidden -mx-6 overflow-x-hidden">
+        <div className="md:hidden overflow-x-hidden">
           <div className="px-6">
             <div
               ref={scrollerRef}

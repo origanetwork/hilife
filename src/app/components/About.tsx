@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { Playfair_Display, Poppins } from "next/font/google";
 import { motion } from "framer-motion";
 import { fadeInProps } from "./Animate";
@@ -28,11 +29,11 @@ export default function About() {
 
         {/* Right: Content */}
         <div className="lg:mt-20">
-          <h2
-            className={`${poppins.className} font-bold text-[52px]  bg-clip-text text-[#008AD2] `}
+          <span
+            className={`${poppins.className} font-bold text-4xl md:text-5xl lg:text-6xl  bg-clip-text text-[#008AD2] `}
           >
             About <span className="text-[#AECB06]">us</span>
-          </h2>
+          </span>
 
           <p
             className={`${poppins.className} mt-3 md:mt-6 text-[16px] leading-[27px] text-[#514B81]`}
@@ -40,12 +41,14 @@ export default function About() {
             At HiLife, we believe sleep is more than rest it’s renewal. For over a decade, we have dedicated ourselves to crafting mattresses that blend modern sleep technology with superior comfort, helping thousands wake up refreshed, pain-free, and ready for life.
           </p>
 
-          <button
-            type="button"
-            className="mt-3 md:mt-6 inline-flex items-center justify-center rounded-[14px] p-[12px] text-white bg-[linear-gradient(90deg,#006397_56.5%,#002031_100%)] shadow-sm hover:brightness-110"
-          >
-            Know More <span aria-hidden> →</span>
-          </button>
+          <div className="flex justify-center md:justify-start">
+            <Link
+              href="/about"
+              className="mt-3 md:mt-6 inline-flex items-center justify-center rounded-[14px] p-[12px] text-white bg-[linear-gradient(90deg,#006397_56.5%,#002031_100%)] shadow-sm hover:brightness-110 transition-all"
+            >
+              Know More <span aria-hidden> →</span>
+            </Link>
+          </div>
         </div>
       </div>
     </motion.section>

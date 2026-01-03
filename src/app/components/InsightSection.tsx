@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Poppins } from "next/font/google";
 import { MotionSection } from "./Motion";
 
@@ -47,17 +48,17 @@ const insights = [
 
 export default function InsightSection() {
   return (
-    <MotionSection className="w-full px-6 py-14 md:py-20">
+    <MotionSection className="w-full px-6 py-10 md:py-12">
       <div className="max-w-7xl mx-auto text-center">
-        <h2
-          className={`${poppins.className} font-bold text-[32px] md:text-[42px] text-[#008AD2] inline-block`}
+        <span
+          className={`${poppins.className} font-bold text-3xl md:text-3xl lg:text-4xl text-[#008AD2] inline-block`}
         >
-          Insights to Elevate Your <span className="text-[#AECB06]">Sleep</span>
-        </h2>
+          Insights to Elevate Your <span className="text-[#AECB06] text-3xl md:text-3xl lg:text-4xl">Sleep</span>
+        </span>
       </div>
 
       {/* Mobile: swipeable, Desktop: 3-column grid */}
-      <div className="mt-14 md:mt-16">
+      <div className="mt-8 md:mt-12">
         <div className="max-w-7xl mx-auto">
           <div className="md:hidden -mx-6 overflow-x-hidden">
             <div
@@ -173,6 +174,20 @@ export default function InsightSection() {
             </article>
           ))}
         </div>
+      </div>
+
+      {/* Read More Button */}
+      <div className="mt-10 md:mt-12 flex justify-center">
+        <Link
+          href="/blog"
+          className={`${poppins.className} inline-flex items-center justify-center gap-2 rounded-xl bg-[linear-gradient(90deg,#006397_56.5%,#002031_100%)] text-white px-6 py-3 text-sm md:text-base font-medium shadow-md hover:brightness-110 transition-all`}
+        >
+          Read More
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M5 12h14" />
+            <path d="M13 5l7 7-7 7" />
+          </svg>
+        </Link>
       </div>
     </MotionSection>
   );

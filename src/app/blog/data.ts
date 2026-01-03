@@ -32,6 +32,17 @@ export const posts: BlogPost[] = [
     content:
       "Simple weekly routines and periodic deep cleaning tips to preserve tile sheen and grout integrity without harsh chemicals.",
   },
+  {
+  id: "mattress-hygiene-tips",
+  category: "Hygiene",
+  title: "Mattress Hygiene Tips",
+  excerpt: "Keep dust mites and allergens away from your mattress.",
+  minutes: 4,
+  date: "2025-12-22",
+  image: "/assets/insight/3.jpg",
+  content:
+    "Using mattress protectors, airing out your bed, and regular sheet washing can greatly improve sleep hygiene.",
+},
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
