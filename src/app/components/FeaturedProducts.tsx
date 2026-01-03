@@ -14,7 +14,7 @@ const poppins = Poppins({
 const products = [
   {
     title: "ELEGENT (MEDICAL)",
-    image: "/assets/hero/banner-1.png",
+    image: "/assets/products/1.jpg",
     rating: 4.7,
     desc: "Special mattresses designed to relieve back pain, made with high-density rebonded foam and super-soft foam, and covered in high-quality knitted fabric with protection against fungus, bacteria, and dust mites.",
     price: "₹ 17,730",
