@@ -14,7 +14,7 @@ const poppins = Poppins({
 const products = [
   {
     title: "ELEGENT (MEDICAL)",
-    image: "/assets/products/1.jpg",
+    image: "/assets/products/banner-1.png",
     rating: 4.7,
     desc: "Special mattresses designed to relieve back pain, made with high-density rebonded foam and super-soft foam, and covered in high-quality knitted fabric with protection against fungus, bacteria, and dust mites.",
     price: "₹ 17,730",
@@ -22,7 +22,7 @@ const products = [
   },
   {
     title: "DELUXE MEMORY",
-    image: "/assets/hero/banner-2.jpg",
+    image: "/assets/Hero/banner-2.jpg",
     rating: 4.6,
     desc: "These series mattresses are made with high-density rebonded foam, super-soft foam, and memory foam, featuring high-quality knitted fabric with protection against fungus, bacteria, and dust mites to help relieve persistent back pain.",
     price: "₹ 38,150",
