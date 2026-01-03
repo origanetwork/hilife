@@ -86,6 +86,9 @@ export default function FeaturedProducts() {
                 />
               </div>
               <div className="p-4">
+                <div>
+                  
+                </div>
                 <div className="flex items-center justify-between">
                   <h3 className={`${poppins.className} uppercase text-2xl sm:text-[13px] font-semibold text-gray-700`}>
                     {p.title}
