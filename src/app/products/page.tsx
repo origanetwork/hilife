@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -71,7 +72,7 @@ export default function ProductsPage() {
       </section>
 
       {/* Grid */}
-      <MotionSection className="px-6 mt-10" id="grid">
+      <section className="px-6 mt-10" id="grid">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <div className={`${poppins.className} inline-block mb-2 rounded-full bg-[#E6F6FF] text-[#008AD2] px-3 py-1 text-xs font-semibold`}>Featured Bedding</div>
@@ -81,7 +82,7 @@ export default function ProductsPage() {
 
           <ProductsClient />
         </div>
-      </MotionSection>
+      </section>
 
       {/* Help CTA Section */}
       <section className="mt-12 px-0">

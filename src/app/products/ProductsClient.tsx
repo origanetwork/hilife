@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
 import { Poppins } from "next/font/google";
 import { products } from "./data";
 import EnquiryModal from "../components/EnquiryModal";
@@ -24,7 +23,6 @@ const options = [
 ];
 
 export default function ProductsClient() {
-  const searchParams = useSearchParams();
   const [enquiryFor, setEnquiryFor] = useState<{ id: string; title: string } | null>(null);
   const [open, setOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>("All");
@@ -32,10 +30,11 @@ export default function ProductsClient() {
 
   // Set active category from URL parameter and scroll to grid
   useEffect(() => {
-    const categoryParam = searchParams.get("category");
+    const params = new URLSearchParams(window.location.search);
+    const categoryParam = params.get("category");
+
     if (categoryParam) {
-      setActiveCategory(categoryParam);
-      // Scroll to the grid section
+      setActiveCategory(decodeURIComponent(categoryParam));
       setTimeout(() => {
         const gridSection = document.getElementById("grid");
         if (gridSection) {
@@ -43,7 +42,7 @@ export default function ProductsClient() {
         }
       }, 100);
     }
-  }, [searchParams]);
+  }, []);
 
   const fmt = useMemo(
     () =>
@@ -139,8 +138,13 @@ export default function ProductsClient() {
 
       </div>
 
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-        {visibleProducts.map((p) => (
+      {visibleProducts.length === 0 ? (
+        <div className="mt-8 text-center">
+          <p className={`${poppins.className} text-gray-600 text-lg`}>No products found in this category.</p>
+        </div>
+      ) : (
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {visibleProducts.map((p) => (
           <MotionDiv
             key={p.id}
             className="group bg-white rounded-3xl overflow-hidden border border-[#E6EEF7] shadow-[0_4px_6px_-2px_rgba(16,24,40,0.08),0_12px_16px_-4px_rgba(16,24,40,0.10)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_20px_-6px_rgba(16,24,40,0.16)] hover:ring-1 hover:ring-[#008AD2]/30"
@@ -192,6 +196,7 @@ export default function ProductsClient() {
           </MotionDiv>
         ))}
       </div>
+      )}
 
       <EnquiryModal product={enquiryFor} open={open} onClose={() => setOpen(false)} />
     </>
