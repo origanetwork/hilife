@@ -14,7 +14,7 @@ const poppins = Poppins({
 const products = [
   {
     title: "ELEGENT (MEDICAL)",
-    image: "/assets/products/banner-1.png",
+    image: "/assets/Hero/banner-1.png",
     rating: 4.7,
     desc: "Special mattresses designed to relieve back pain, made with high-density rebonded foam and super-soft foam, and covered in high-quality knitted fabric with protection against fungus, bacteria, and dust mites.",
     price: "₹ 17,730",
@@ -30,7 +30,7 @@ const products = [
   },
   {
     title: "PREMIUM (MEDICAL)",
-    image: "/assets/hero/banner-3.jpg",
+    image: "/assets/Hero/banner-3.jpg",
     rating: 4.8,
     desc: "These series mattresses are made with high-density rebonded foam, super-soft foam, and memory foam, featuring high-quality knitted fabric with protection against fungus, bacteria, and dust mites to help relieve persistent back pain.",
     price: "₹ 16,850",
@@ -38,7 +38,7 @@ const products = [
   },
   {
     title: "LATEX",
-    image: "/assets/hero/banner-4.png",
+    image: "/assets/Hero/banner-4.png",
     rating: 4.7,
     desc: "These series mattresses are made from natural latex sourced from the rubber tree Hevea brasiliensis, free from harmful chemicals. They offer a soft initial feel, adaptive body support, and proper spinal alignment for excellent back support.",
     price: "₹ 62,350",
