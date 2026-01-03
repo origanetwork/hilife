@@ -22,11 +22,41 @@ const options = [
   { value: "newest", label: "Newest" },
 ];
 
+// Skeleton loader component
+function ProductCardSkeleton() {
+  return (
+    <div className="bg-white rounded-3xl overflow-hidden border border-[#E6EEF7] shadow-[0_4px_6px_-2px_rgba(16,24,40,0.08),0_12px_16px_-4px_rgba(16,24,40,0.10)]">
+      {/* Image skeleton */}
+      <div className="relative aspect-4/3 overflow-hidden bg-gray-200 animate-pulse" />
+
+      <div className="p-5 md:p-6">
+        {/* Category badge skeleton */}
+        <div className="inline-flex rounded-full bg-gray-200 h-6 w-24 animate-pulse" />
+
+        {/* Title skeleton */}
+        <div className="mt-1 h-7 bg-gray-200 rounded animate-pulse w-3/4" />
+
+        {/* Price section skeleton */}
+        <div className="mt-5 border-t border-[#E6EEF7] pt-4">
+          <div className="h-6 bg-gray-200 rounded animate-pulse w-24" />
+        </div>
+
+        {/* Buttons skeleton */}
+        <div className="mt-4 flex items-center gap-3">
+          <div className="h-10 bg-gray-200 rounded-full animate-pulse flex-1" />
+          <div className="h-10 bg-gray-200 rounded-full animate-pulse flex-1" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ProductsClient() {
   const [enquiryFor, setEnquiryFor] = useState<{ id: string; title: string } | null>(null);
   const [open, setOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [sort, setSort] = useState<"price-asc" | "price-desc" | "newest">("newest");
+  const [isLoading, setIsLoading] = useState(true);
 
   // Set active category from URL parameter and scroll to grid
   useEffect(() => {
@@ -42,6 +72,13 @@ export default function ProductsClient() {
         }
       }, 100);
     }
+
+    // Simulate loading delay for initial render
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+
+    return () => clearTimeout(loadingTimer);
   }, []);
 
   const fmt = useMemo(

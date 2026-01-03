@@ -68,7 +68,7 @@ export default function ContactPage() {
                     <div className="mt-8 w-full overflow-hidden rounded-xl border border-white/10">
                       <iframe
                         title="Company Location"
-                        src="https://www.google.com/maps?q=Malappuram,Kerala,India&output=embed"
+                        src="https://www.google.com/maps?q=Panikkarpadi Bus Stop, SH 71, Perumanna Klari Gramapanchayat, Kerala 676501&output=embed"
                         className="w-full h-[180px] md:h-[200px] rounded-xl"
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
