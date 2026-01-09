@@ -14,7 +14,7 @@ const poppins = Poppins({
 const products = [
   {
     title: "ELEGENT (MEDICAL)",
-    image: "/assets/hero/banner-1.png",
+    image: "/assets/Hero/banner-1.png",
     rating: 4.7,
     desc: "Special mattresses designed to relieve back pain, made with high-density rebonded foam and super-soft foam, and covered in high-quality knitted fabric with protection against fungus, bacteria, and dust mites.",
     price: "₹ 17,730",
@@ -22,7 +22,7 @@ const products = [
   },
   {
     title: "DELUXE MEMORY",
-    image: "/assets/hero/banner-2.jpg",
+    image: "/assets/Hero/banner-2.jpg",
     rating: 4.6,
     desc: "These series mattresses are made with high-density rebonded foam, super-soft foam, and memory foam, featuring high-quality knitted fabric with protection against fungus, bacteria, and dust mites to help relieve persistent back pain.",
     price: "₹ 38,150",
@@ -30,7 +30,7 @@ const products = [
   },
   {
     title: "PREMIUM (MEDICAL)",
-    image: "/assets/hero/banner-3.jpg",
+    image: "/assets/Hero/banner-3.jpg",
     rating: 4.8,
     desc: "These series mattresses are made with high-density rebonded foam, super-soft foam, and memory foam, featuring high-quality knitted fabric with protection against fungus, bacteria, and dust mites to help relieve persistent back pain.",
     price: "₹ 16,850",
@@ -38,7 +38,7 @@ const products = [
   },
   {
     title: "LATEX",
-    image: "/assets/hero/banner-4.png",
+    image: "/assets/Hero/banner-4.png",
     rating: 4.7,
     desc: "These series mattresses are made from natural latex sourced from the rubber tree Hevea brasiliensis, free from harmful chemicals. They offer a soft initial feel, adaptive body support, and proper spinal alignment for excellent back support.",
     price: "₹ 62,350",
@@ -73,7 +73,7 @@ export default function FeaturedProducts() {
             <motion.div
               key={p.title}
               variants={staggerItem}
-              className="flex-none snap-center w-[85%] sm:w-auto rounded-2xl border border-black/10 bg-white shadow-md overflow-hidden mx-0 sm:mx-auto lg:max-w-[330px]"
+              className="flex flex-col flex-none snap-center w-[85%] sm:w-auto rounded-2xl border border-black/10 bg-white shadow-md overflow-hidden mx-0 sm:mx-auto lg:max-w-[330px]"
             >
               <div className="relative aspect-4/3">
                 <Image
@@ -85,31 +85,32 @@ export default function FeaturedProducts() {
                   priority={false}
                 />
               </div>
-              <div className="p-4">
-                <div>
-                  
-                </div>
-                <div className="flex items-center justify-between">
-                  <h3 className={`${poppins.className} uppercase text-2xl sm:text-[13px] font-semibold text-gray-700`}>
-                    {p.title}
-                  </h3>
-                  <div className="flex items-center gap-1 text-[13px] font-semibold text-gray-800">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-orange-500">
-                      <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.869 1.401-8.168L.132 9.21l8.2-1.192z" />
-                    </svg>
-                    <span>{p.rating}</span>
+              <div className="p-4 flex flex-col h-full">
+                <div className="flex-grow mb-3">
+                  <div className="flex items-center justify-between">
+                    <h3 className={`${poppins.className} uppercase text-2xl sm:text-[13px] font-semibold text-gray-700`}>
+                      {p.title}
+                    </h3>
+                    <div className="flex items-center gap-1 text-[13px] font-semibold text-gray-800">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-orange-500">
+                        <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.787 1.401 8.168L12 18.896l-7.335 3.869 1.401-8.168L.132 9.21l8.2-1.192z" />
+                      </svg>
+                      <span>{p.rating}</span>
+                    </div>
                   </div>
-                </div>
-                <p className={`${poppins.className} mt-2 text-[12px] font-light text-gray-400`}>
-                  {p.desc}
-                </p>
-                <div className="mt-4 flex items-baseline gap-3">
-                  <div className="text-[18px] font-semibold text-gray-900">{p.price}</div>
-                  <div className="text-[14px] text-gray-400 line-through">{p.mrp}</div>
+
+                  <p className={`${poppins.className} mt-2 text-[12px] font-light text-gray-400`}>
+                    {p.desc}
+                  </p>
+
+                  <div className="mt-4 flex items-baseline gap-3">
+                    <div className="text-[18px] font-semibold text-gray-900">{p.price}</div>
+                    <div className="text-[14px] text-gray-400 line-through">{p.mrp}</div>
+                  </div>
                 </div>
                 <button
                   type="button"
-                  className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[linear-gradient(90deg,#006397_83.62%,#044668_100%)] text-white text-[14px] font-semibold py-3 shadow-sm hover:brightness-110"
+                  className="mt-auto w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[linear-gradient(90deg,#006397_83.62%,#044668_100%)] text-white text-[14px] font-semibold py-3 shadow-sm hover:brightness-110"
                 >
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="9" cy="21" r="1"></circle>
