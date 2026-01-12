@@ -69,12 +69,13 @@ export default function Header() {
               isHome ? "text-white" : "text-black"
             }`}
           >
-            <button
+            <Link
+              href="/cart"
               aria-label="Cart"
               className="inline-flex items-center justify-center h-11 w-11 rounded-full bg-transparent hover:bg-transparent border-0 appearance-none ring-0 focus:ring-0 focus-visible:ring-0 outline-none focus:outline-none focus-visible:outline-none shadow-none hover:scale-110 transition-transform"
             >
               <FiShoppingCart className="h-6 w-6" />
-            </button>
+            </Link>
             <button
               aria-label="Phone"
               className="inline-flex items-center justify-center h-11 w-11 rounded-full bg-transparent hover:bg-transparent border-0 appearance-none ring-0 focus:ring-0 focus-visible:ring-0 outline-none focus:outline-none focus-visible:outline-none shadow-none hover:scale-110 transition-transform"
@@ -135,12 +136,14 @@ export default function Header() {
 
           {/* Mobile Icons */}
           <div className="mt-10 flex justify-center gap-6">
-            <button
+            <Link
+              href="/cart"
               aria-label="Cart"
+              onClick={() => setOpen(false)}
               className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
             >
               <FiShoppingCart className="h-6 w-6 text-gray-700" />
-            </button>
+            </Link>
             <button
               aria-label="Phone"
               className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
