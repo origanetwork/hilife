@@ -47,6 +47,18 @@ export default function CartPage() {
     }
   }, []);
 
+  // Listen for cart clear event from modal
+  useEffect(() => {
+    const handleCartCleared = () => {
+      setCartItems([]);
+    };
+
+    window.addEventListener("cartCleared", handleCartCleared);
+    return () => {
+      window.removeEventListener("cartCleared", handleCartCleared);
+    };
+  }, []);
+
   // Save cart to localStorage whenever it changes (but only after initial load)
   useEffect(() => {
     if (isLoaded && typeof window !== "undefined") {
@@ -368,9 +380,15 @@ export default function CartPage() {
 
       {/* Enquiry Modal for checkout */}
       <EnquiryModal
-        product={cartItems.length > 0 ? { id: "cart-checkout", title: "Cart Checkout Enquiry" } : null}
+        cartItems={cartItems}
         open={enquiryOpen}
         onClose={() => setEnquiryOpen(false)}
+        onOrderSuccess={() => {
+          // Redirect to products page after a short delay
+          setTimeout(() => {
+            window.location.href = "/products";
+          }, 2500);
+        }}
       />
     </main>
   );

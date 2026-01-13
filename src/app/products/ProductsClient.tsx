@@ -44,7 +44,7 @@ function ProductCardSkeleton() {
 }
 
 export default function ProductsClient() {
-  const [enquiryFor, setEnquiryFor] = useState<{ id: string; title: string } | null>(null);
+  const [enquiryFor, setEnquiryFor] = useState<{ id: string; title: string; price: number } | null>(null);
   const [open, setOpen] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState<string | undefined>(undefined);
   const [sort, setSort] = useState<"price-asc" | "price-desc" | "newest">("newest");
@@ -273,7 +273,7 @@ export default function ProductsClient() {
                     </button>
                     <button
                       onClick={() => {
-                        setEnquiryFor({ id: p.id, title: p.name });
+                        setEnquiryFor({ id: p.id, title: p.name, price: p.price });
                         setOpen(true);
                       }}
                       className={`${poppins.className} inline-flex justify-center w-full px-4 py-2.5 rounded-full border border-[#008AD2] text-[#008AD2] hover:bg-[#008AD2]/5 transition-all duration-200`}

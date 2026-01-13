@@ -174,3 +174,37 @@ export interface Contact {
   message: string;
   createdAt: string;
 }
+
+// ================= ORDER =================
+
+export interface OrderItem {
+  productId: string;
+  quantity: number;
+  amount: number;
+  sizeId?: string;
+  colorId?: string;
+  materialTypeId?: string;
+}
+
+export interface CreateOrderRequest {
+  firstName: string;
+  lastName?: string;
+  countryCode?: string;
+  phone: string;
+  email?: string;
+  password?: string;
+  shippingAddress?: string;
+  note?: string;
+  items: OrderItem[];
+}
+
+export interface Order {
+  id: string;
+  userId: string;
+  totalAmount: number;
+  status: string;
+  shippingAddress: string | null;
+  note: string | null;
+  createdAt: string;
+  updatedAt: string;
+}

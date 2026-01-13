@@ -9,6 +9,8 @@ import type {
   Product,
   CreateContactRequest,
   Contact,
+  CreateOrderRequest,
+  Order,
 } from "../types";
 
 // ============================================
@@ -54,6 +56,20 @@ export const createContactApi = async (
 ): Promise<ApiResponse<Contact>> => {
   const response = await axiosInstance.post<ApiResponse<Contact>>(
     "/v1/user/contact",
+    payload
+  );
+  return response.data;
+};
+
+// ============================================
+// ORDER APIs
+// ============================================
+
+export const createOrderApi = async (
+  payload: CreateOrderRequest
+): Promise<ApiResponse<Order>> => {
+  const response = await axiosInstance.post<ApiResponse<Order>>(
+    "/v1/user/order",
     payload
   );
   return response.data;

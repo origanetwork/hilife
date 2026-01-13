@@ -264,7 +264,7 @@ export default function ProductDetailClient({ product }: Props) {
         </div>
       </div>
 
-      <EnquiryModal product={{ id: product.id, title: product.title }} open={open} onClose={() => setOpen(false)} />
+      <EnquiryModal product={{ id: product.id, title: product.name, price: product.price }} open={open} onClose={() => setOpen(false)} />
     </div>
   );
 }
