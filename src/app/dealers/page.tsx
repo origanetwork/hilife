@@ -6,39 +6,9 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { MotionSection } from "../components/Motion";
 import DealerEnquiryModal from "../components/DealerEnquiryModal";
+import { useGetDealers } from "../../service";
 
 const poppins = Poppins({ weight: ["400", "500", "600", "700"], subsets: ["latin"], display: "swap" });
-// Temporary data; replace with API or CMS later
-const dealers = [
-  {
-    id: "d1",
-    name: "HiLife Mattress Store - Central",
-    address: "123 MG Road, Central Plaza, Bengaluru, KA 560001",
-    phone: "+91 98765 43210",
-    location: "Bengaluru, Karnataka",
-  },
-  {
-    id: "d2",
-    name: "HiLife Mattress Store - Andheri",
-    address: "2nd Floor, Skyline Mall, Andheri West, Mumbai, MH 400053",
-    phone: "+91 98111 22233",
-    location: "Mumbai, Maharashtra",
-  },
-  {
-    id: "d3",
-    name: "HiLife Mattress Gallery - Anna Nagar",
-    address: "No. 45, 2nd Ave, Anna Nagar, Chennai, TN 600040",
-    phone: "+91 99555 66777",
-    location: "Chennai, Tamil Nadu",
-  },
-  {
-    id: "d4",
-    name: "HiLife Mattress Studio - Banjara Hills",
-    address: "Road No. 12, Banjara Hills, Hyderabad, TS 500034",
-    phone: "+91 97979 80808",
-    location: "Hyderabad, Telangana",
-  },
-];
 
 function DealerCard({ name, address, phone, location }: { name: string; address: string; phone: string; location: string }) {
   return (
@@ -83,6 +53,10 @@ function DealerCard({ name, address, phone, location }: { name: string; address:
 
 export default function DealersPage() {
   const [open, setOpen] = useState(false);
+  const { data: dealersResponse, isLoading, error } = useGetDealers({ status: true });
+
+  const dealers = dealersResponse?.data || [];
+
   return (
     <main className="bg-white min-h-screen">
       <Header />
@@ -107,11 +81,45 @@ export default function DealersPage() {
 
           <p className={`${poppins.className} mt-2 text-[#6E6E6E]`}>Find an authorized HiLife dealer near you.</p>
 
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {dealers.map((d) => (
-              <DealerCard key={d.id} name={d.name} address={d.address} phone={d.phone} location={d.location} />
-            ))}
-          </div>
+          {/* Loading State */}
+          {isLoading && (
+            <div className="mt-8 flex justify-center items-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#008AD2]"></div>
+            </div>
+          )}
+
+          {/* Error State */}
+          {error && (
+            <div className="mt-8 bg-red-50 border border-red-200 rounded-lg p-4">
+              <p className={`${poppins.className} text-red-600`}>
+                Failed to load dealers. Please try again later.
+              </p>
+            </div>
+          )}
+
+          {/* Dealers Grid */}
+          {!isLoading && !error && dealers.length > 0 && (
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {dealers.map((d) => (
+                <DealerCard
+                  key={d.id}
+                  name={d.name}
+                  address={d.address}
+                  phone={d.phone || 'N/A'}
+                  location={d.location}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Empty State */}
+          {!isLoading && !error && dealers.length === 0 && (
+            <div className="mt-8 text-center py-12">
+              <p className={`${poppins.className} text-[#6E6E6E] text-lg`}>
+                No dealers found at the moment.
+              </p>
+            </div>
+          )}
 
           {/* Become a dealer block */}
           <div id="become-dealer" className="mt-12">
