@@ -98,7 +98,7 @@ export interface GetGalleryParams {
 
 export interface Product {
   id: string;
-  title: string;
+  name: string;
   description: string | null;
   price: number;
   offerPrice?: number | null;
