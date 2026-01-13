@@ -6,6 +6,7 @@ import type {
   CreateDealerRequest,
   Category,
   GalleryImage,
+  Product,
 } from "../types";
 
 // ============================================
@@ -31,3 +32,13 @@ export const getCategoriesApi = (params?: Record<string, any>) =>
 
 export const getGalleryImagesApi = (params?: Record<string, any>) =>
   axiosInstance.get<ApiResponse<GalleryImage[]>>("/v1/user/gallery", { params });
+
+// ============================================
+// PRODUCT APIs
+// ============================================
+
+export const getAllProductsApi = (params?: Record<string, any>) =>
+  axiosInstance.get<ApiResponse<Product[]>>("/v1/user/product", { params });
+
+export const getProductApi = (id: string) =>
+  axiosInstance.get<ApiResponse<Product>>(`/v1/user/product/${id}`);

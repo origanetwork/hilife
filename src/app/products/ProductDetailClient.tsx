@@ -1,82 +1,148 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { TbScale, TbUserCheck, TbWind, TbAirConditioning, TbSnowflake, TbGripVertical } from "react-icons/tb";
 import { Poppins } from "next/font/google";
 import EnquiryModal from "../components/EnquiryModal";
+import { Product } from "@/types";
 
 const poppins = Poppins({ weight: ["400", "500", "600", "700"], subsets: ["latin"], display: "swap" });
 
 type Props = {
-  product: {
-    id: string;
-    title: string;
-    category: string;
-    image: string;
-    images?: string[];
-    tags?: string[];
-    rating?: number;
-    description?: string;
-  };
+  product: Product;
 };
 
 export default function ProductDetailClient({ product }: Props) {
   const [open, setOpen] = useState(false);
-  const gallery = (product.images && product.images.length > 0)
-    ? product.images
-    : [product.image, product.image, product.image, product.image];
+
+  // Get image URLs from product.images array
+  const imageUrls = product.images
+    ?.filter((img) => img.imageUrl)
+    .map((img) => img.imageUrl as string) || [];
+
   const [activeIdx, setActiveIdx] = useState(0);
-  const activeImage = gallery[Math.min(activeIdx, gallery.length - 1)];
+  const activeImage = imageUrls[Math.min(activeIdx, imageUrls.length - 1)] || "/assets/products/placeholder.jpg";
 
   const addToCart = () => {
     if (typeof window !== "undefined") {
-      alert(`${product.title} added to cart (demo).`);
+      alert(`${product.name} added to cart (demo).`);
     }
   };
+
+  // Get tags, sizes, colors, material types from product
+  const tags = product.productTags?.map((pt) => pt.tag.name) || [];
+  const sizes = product.productSizes?.map((ps) => ps.size.name) || [];
+  const colors = product.productColors?.map((pc) => pc.color.name) || [];
+  const materialTypes = product.productMaterialTypes?.map((pm) => pm.materialType.name) || [];
 
   return (
     <div className="lg:mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
       <div>
-        <div className="relative aspect-4/3 rounded-3xl overflow-hidden border border-black/10 shadow-[0_4px_12px_-4px_rgba(16,24,40,0.12),0_24px_32px_-8px_rgba(16,24,40,0.12)]">
-          <Image src={activeImage} alt={product.title} fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" />
+        <div className="relative aspect-4/3 rounded-3xl overflow-hidden border border-black/10 shadow-[0_4px_12px_-4px_rgba(16,24,40,0.12),0_24px_32px_-8px_rgba(16,24,40,0.12)] bg-gray-100">
+          {activeImage ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={activeImage} alt={product.name} className="w-full h-full object-cover" />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-gray-400">
+              No Image
+            </div>
+          )}
+        </div>
+
+        {/* Product Attributes - Dropdown Style */}
+        <div className="mt-5 space-y-3">
+          {sizes.length > 0 && (
+            <div className="border border-[#E4E7EC] rounded-lg overflow-hidden bg-white">
+              <div className={`${poppins.className} px-4 py-3 bg-[#F9FAFB] border-b border-[#E4E7EC] text-sm font-semibold text-[#344054]`}>
+                Available Sizes
+              </div>
+              <div className="px-4 py-3 flex flex-wrap gap-2">
+                {sizes.map((size) => (
+                  <span
+                    key={size}
+                    className={`${poppins.className} inline-flex items-center justify-center px-3 py-1.5 rounded-md bg-[#F2F4F7] text-[#344054] text-sm font-medium`}
+                  >
+                    {size}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {colors.length > 0 && (
+            <div className="border border-[#E4E7EC] rounded-lg overflow-hidden bg-white">
+              <div className={`${poppins.className} px-4 py-3 bg-[#F9FAFB] border-b border-[#E4E7EC] text-sm font-semibold text-[#344054]`}>
+                Available Colors
+              </div>
+              <div className="px-4 py-3 flex flex-wrap gap-2">
+                {colors.map((color) => (
+                  <span
+                    key={color}
+                    className={`${poppins.className} inline-flex items-center justify-center px-3 py-1.5 rounded-md bg-[#F2F4F7] text-[#344054] text-sm font-medium`}
+                  >
+                    {color}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {materialTypes.length > 0 && (
+            <div className="border border-[#E4E7EC] rounded-lg overflow-hidden bg-white">
+              <div className={`${poppins.className} px-4 py-3 bg-[#F9FAFB] border-b border-[#E4E7EC] text-sm font-semibold text-[#344054]`}>
+                Material Types
+              </div>
+              <div className="px-4 py-3 flex flex-wrap gap-2">
+                {materialTypes.map((material) => (
+                  <span
+                    key={material}
+                    className={`${poppins.className} inline-flex items-center justify-center px-3 py-1.5 rounded-md bg-[#F2F4F7] text-[#344054] text-sm font-medium`}
+                  >
+                    {material}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div>
-        <div className="text-sm text-[#667085]">{product.category}</div>
-        <h1 className={`${poppins.className} mt-1 text-[26px] md:text-[32px] font-semibold text-[#101828]`}>{product.title}</h1>
-        {product.rating && (
-          <div className="mt-2 inline-flex items-center gap-1 rounded-full bg-[#FFF7E6] text-[#B45309] px-2 py-1 text-xs">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-4 w-4" fill="#F59E0B"><path d="M12 2l2.9 6.2L22 9.3l-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.8L2 9.3l7.1-1.1L12 2z"/></svg>
-            {product.rating.toFixed(1)} / 5
+        <h1 className={`${poppins.className} mt-1 text-[26px] md:text-[32px] font-semibold text-[#101828]`}>{product.name}</h1>
+        {product.description && (
+          <p className={`${poppins.className} mt-5 text-[#475467]`}>{product.description}</p>
+        )}
+
+        {/* Tags under description */}
+        {tags.length > 0 && (
+          <div className="mt-4">
+            <div className="flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <span key={tag} className="inline-flex items-center rounded-full bg-[#F2F7FB] text-[#0B2C3D] border border-[#E6EEF7] px-3 py-1 text-xs font-medium">{tag}</span>
+              ))}
+            </div>
           </div>
         )}
-        {product.tags && (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {product.tags.map((t) => (
-              <span key={t} className="inline-flex items-center rounded-full bg-[#F2F4F7] text-[#344054] px-3 py-1 text-xs">{t}</span>
-            ))}
-          </div>
-        )}
-        <p className={`${poppins.className} mt-5 text-[#475467]`}>High-quality product engineered for performance and reliability.</p>
         <div className="mt-6 flex flex-wrap items-center gap-3">
           <button onClick={addToCart} className={`${poppins.className} inline-flex px-5 py-2.5 rounded-full bg-[#101828] text-white hover:bg-[#0b1526]`}>Add to Cart</button>
           <button onClick={() => setOpen(true)} className={`${poppins.className} inline-flex px-5 py-2.5 rounded-full border border-black/10 hover:bg-gray-50`}>Enquire Now</button>
         </div>
-        <div className="mt-5 grid grid-cols-4 gap-3 md:max-w-md">
-          {gallery.slice(0,4).map((img, idx) => (
-            <button
-              key={img+idx}
-              type="button"
-              aria-label={`View image ${idx+1}`}
-              aria-current={activeIdx === idx}
-              onClick={() => setActiveIdx(idx)}
-              className={`relative aspect-square rounded-2xl overflow-hidden border ${activeIdx === idx ? 'ring-2 ring-[#008AD2] border-transparent' : 'border-black/10'} transition`}
-            >
-              <Image src={img} alt={`${product.title} thumbnail ${idx+1}`} fill sizes="(min-width:1024px) 8vw, 25vw" className="object-cover" />
-            </button>
-          ))}
-        </div>
+        {imageUrls.length > 0 && (
+          <div className="mt-5 grid grid-cols-4 gap-3 md:max-w-md">
+            {imageUrls.slice(0, 4).map((img, idx) => (
+              <button
+                key={img + idx}
+                type="button"
+                aria-label={`View image ${idx + 1}`}
+                aria-current={activeIdx === idx}
+                onClick={() => setActiveIdx(idx)}
+                className={`relative aspect-square rounded-2xl overflow-hidden border ${activeIdx === idx ? 'ring-2 ring-[#008AD2] border-transparent' : 'border-black/10'} transition bg-gray-100`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={img} alt={`${product.name} thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="md:col-span-2 mt-12">
@@ -134,7 +200,7 @@ export default function ProductDetailClient({ product }: Props) {
         </div>
       </div>
 
-      <EnquiryModal product={{ id: product.id, title: product.title }} open={open} onClose={() => setOpen(false)} />
+      <EnquiryModal product={{ id: product.id, title: product.name }} open={open} onClose={() => setOpen(false)} />
     </div>
   );
 }

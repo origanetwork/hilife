@@ -91,3 +91,64 @@ export interface GetGalleryParams {
   page?: number;
   limit?: number;
 }
+
+// ============================================
+// PRODUCT TYPES
+// ============================================
+
+export interface Product {
+  id: string;
+  title: string;
+  description: string | null;
+  price: number;
+  offerPrice?: number | null;
+  categoryId: string;
+  category: {
+    id: string;
+    name: string;
+    slug: string;
+  };
+  images?: Array<{
+    id: string;
+    imageUrl: string | null;
+    productId: string;
+  }>;
+  productTags?: Array<{
+    id: string;
+    tag: {
+      id: string;
+      name: string;
+    };
+  }>;
+  productSizes?: Array<{
+    id: string;
+    size: {
+      id: string;
+      name: string;
+    };
+  }>;
+  productColors?: Array<{
+    id: string;
+    color: {
+      id: string;
+      name: string;
+    };
+  }>;
+  productMaterialTypes?: Array<{
+    id: string;
+    materialType: {
+      id: string;
+      name: string;
+    };
+  }>;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface GetProductsParams {
+  page?: number;
+  limit?: number;
+  search?: string;
+  categoryId?: string;
+  sortBy?: "price-asc" | "price-desc" | "newest";
+}

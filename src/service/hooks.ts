@@ -11,6 +11,8 @@ import type {
   GetCategoriesParams,
   GalleryImage,
   GetGalleryParams,
+  Product,
+  GetProductsParams,
 } from "../types";
 
 import {
@@ -18,6 +20,8 @@ import {
   createDealerApi,
   getCategoriesApi,
   getGalleryImagesApi,
+  getAllProductsApi,
+  getProductApi,
 } from "./api";
 
 // ============================================
@@ -140,6 +144,77 @@ export function useGetGalleryImages(params?: GetGalleryParams) {
       mounted = false;
     };
   }, [params?.page, params?.limit]);
+
+  return { data, isLoading, error };
+}
+
+// ============================================
+// PRODUCT HOOKS
+// ============================================
+
+export function useGetProducts(params?: GetProductsParams) {
+  const [data, setData] = useState<ApiResponse<Product[]> | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    setIsLoading(true);
+
+    getAllProductsApi(params)
+      .then((res) => {
+        if (mounted) {
+          setData(res.data);
+          setIsLoading(false);
+        }
+      })
+      .catch((err) => {
+        if (mounted) {
+          setError(err);
+          setIsLoading(false);
+        }
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, [params?.page, params?.limit, params?.search, params?.categoryId, params?.sortBy]);
+
+  return { data, isLoading, error };
+}
+
+export function useGetProduct(id: string) {
+  const [data, setData] = useState<Product | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    setIsLoading(true);
+
+    if (!id) {
+      setIsLoading(false);
+      return;
+    }
+
+    getProductApi(id)
+      .then((res) => {
+        if (mounted) {
+          setData(res.data.data);
+          setIsLoading(false);
+        }
+      })
+      .catch((err) => {
+        if (mounted) {
+          setError(err);
+          setIsLoading(false);
+        }
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, [id]);
 
   return { data, isLoading, error };
 }

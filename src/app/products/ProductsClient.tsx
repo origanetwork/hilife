@@ -1,13 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState, useEffect } from "react";
 import { Poppins } from "next/font/google";
-import { products } from "./data";
 import EnquiryModal from "../components/EnquiryModal";
 import { MotionDiv } from "../components/Motion";
-import { Listbox } from "@headlessui/react";
+import { useGetProducts, useGetCategories } from "@/service";
 
 
 const poppins = Poppins({
@@ -15,12 +13,6 @@ const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
 });
-
-const options = [
-  { value: "price-asc", label: "Price Low → High" },
-  { value: "price-desc", label: "Price High → Low" },
-  { value: "newest", label: "Newest" },
-];
 
 // Skeleton loader component
 function ProductCardSkeleton() {
@@ -54,17 +46,30 @@ function ProductCardSkeleton() {
 export default function ProductsClient() {
   const [enquiryFor, setEnquiryFor] = useState<{ id: string; title: string } | null>(null);
   const [open, setOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [activeCategoryId, setActiveCategoryId] = useState<string | undefined>(undefined);
   const [sort, setSort] = useState<"price-asc" | "price-desc" | "newest">("newest");
-  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch categories
+  const { data: categoriesData, isLoading: categoriesLoading } = useGetCategories({
+    page: 1,
+    limit: 100,
+  });
+
+  // Fetch products with filters
+  const { data: productsData, isLoading: productsLoading, error: productsError } = useGetProducts({
+    page: 1,
+    limit: 100,
+    categoryId: activeCategoryId,
+    sortBy: sort,
+  });
 
   // Set active category from URL parameter and scroll to grid
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const categoryParam = params.get("category");
+    const categoryIdParam = params.get("categoryId");
 
-    if (categoryParam) {
-      setActiveCategory(decodeURIComponent(categoryParam));
+    if (categoryIdParam) {
+      setActiveCategoryId(categoryIdParam);
       setTimeout(() => {
         const gridSection = document.getElementById("grid");
         if (gridSection) {
@@ -72,13 +77,6 @@ export default function ProductsClient() {
         }
       }, 100);
     }
-
-    // Simulate loading delay for initial render
-    const loadingTimer = setTimeout(() => {
-      setIsLoading(false);
-    }, 800);
-
-    return () => clearTimeout(loadingTimer);
   }, []);
 
   const fmt = useMemo(
@@ -91,63 +89,57 @@ export default function ProductsClient() {
     []
   );
 
+  // Process categories - add "All" option
   const categories = useMemo(() => {
-    const unique = Array.from(new Set(products.map((p) => p.category)));
-    return ["All", ...unique];
-  }, []);
+    if (!categoriesData?.data) return [];
+    return categoriesData.data;
+  }, [categoriesData]);
 
-  const visibleProducts = useMemo(() => {
-    let list = products.slice();
-
-    if (activeCategory !== "All") {
-      list = list.filter((p) => p.category === activeCategory);
-    }
-
-    if (sort === "price-asc") {
-      list.sort((a, b) => a.price - b.price);
-    } else if (sort === "price-desc") {
-      list.sort((a, b) => b.price - a.price);
-    } else {
-      list.sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() -
-          new Date(a.createdAt).getTime()
-      );
-    }
-
-    return list;
-  }, [activeCategory, sort]);
+  // Get products from API
+  const products = productsData?.data || [];
+  const isLoading = productsLoading || categoriesLoading;
 
   return (
     <>
       {/* Controls */}
       <div className="mt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-4">
         <div className="flex items-center gap-2 overflow-x-auto -mx-1 px-1">
+          {/* All products button */}
+          <button
+            onClick={() => setActiveCategoryId(undefined)}
+            className={`${poppins.className} inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition border ${!activeCategoryId
+                ? "bg-[#008AD2] text-white border-[#008AD2]"
+                : "bg-white text-[#0B2C3D] border-[#E4E7EC] hover:border-[#008AD2] hover:text-[#008AD2]"
+              }`}
+          >
+            All
+          </button>
+
+          {/* Category buttons */}
           {categories.map((c) => (
             <button
-              key={c}
-              onClick={() => setActiveCategory(c)}
-              className={`${poppins.className} inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition border ${
-                activeCategory === c
+              key={c.id}
+              onClick={() => setActiveCategoryId(c.id)}
+              className={`${poppins.className} inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition border ${activeCategoryId === c.id
                   ? "bg-[#008AD2] text-white border-[#008AD2]"
                   : "bg-white text-[#0B2C3D] border-[#E4E7EC] hover:border-[#008AD2] hover:text-[#008AD2]"
-              }`}
+                }`}
             >
-              {c}
+              {c.name}
             </button>
           ))}
         </div>
 
         <div className="inline-flex items-center gap-3">
-  <label className="text-sm font-medium text-[#344054]">
-    Sort by
-  </label>
+          <label className="text-sm font-medium text-[#344054]">
+            Sort by
+          </label>
 
-  <div className="relative">
-    <select
-      value={sort}
-      onChange={(e) => setSort(e.target.value as any)}
-      className="
+          <div className="relative">
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as any)}
+              className="
         h-10 w-[180px]
         rounded-full
         border border-[#E4E7EC]
@@ -159,80 +151,109 @@ export default function ProductsClient() {
         focus:ring-2 focus:ring-[#BFE9FF]
         appearance-none
       "
-    >
-      <option value="price-asc">Price: Low → High</option>
-      <option value="price-desc">Price: High → Low</option>
-      <option value="newest">Newest</option>
-    </select>
+            >
+              <option value="price-asc">Price: Low → High</option>
+              <option value="price-desc">Price: High → Low</option>
+              <option value="newest">Newest</option>
+            </select>
 
-    {/* Custom arrow */}
-    <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[#667085]">
-      ▼
-    </span>
-  </div>
-</div>
+            {/* Custom arrow */}
+            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[#667085]">
+              ▼
+            </span>
+          </div>
+        </div>
 
 
       </div>
 
-      {visibleProducts.length === 0 ? (
-        <div className="mt-8 text-center">
-          <p className={`${poppins.className} text-gray-600 text-lg`}>No products found in this category.</p>
-        </div>
-      ) : (
+      {/* Loading State */}
+      {isLoading && (
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {visibleProducts.map((p) => (
-          <MotionDiv
-            key={p.id}
-            className="group bg-white rounded-3xl overflow-hidden border border-[#E6EEF7] shadow-[0_4px_6px_-2px_rgba(16,24,40,0.08),0_12px_16px_-4px_rgba(16,24,40,0.10)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_20px_-6px_rgba(16,24,40,0.16)] hover:ring-1 hover:ring-[#008AD2]/30"
-          >
-            <div className="relative aspect-4/3 overflow-hidden">
-              <Image
-                src={p.image}
-                alt={p.title}
-                fill
-                sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
+          {[...Array(6)].map((_, i) => (
+            <ProductCardSkeleton key={i} />
+          ))}
+        </div>
+      )}
 
-            <div className="p-5 md:p-6">
-              <div className="inline-flex items-center rounded-full bg-[#F2F7FB] text-[#0B2C3D] border border-[#E6EEF7] px-3 py-1 text-xs">
-                {p.category}
+      {/* Error State */}
+      {productsError && !isLoading && (
+        <div className="mt-8 text-center">
+          <p className={`${poppins.className} text-red-600 text-lg`}>
+            Failed to load products. Please try again later.
+          </p>
+        </div>
+      )}
+
+      {/* Empty State */}
+      {!isLoading && !productsError && products.length === 0 && (
+        <div className="mt-8 text-center">
+          <p className={`${poppins.className} text-gray-600 text-lg`}>
+            No products found in this category.
+          </p>
+        </div>
+      )}
+
+      {/* Products Grid */}
+      {!isLoading && !productsError && products.length > 0 && (
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {products.map((p) => (
+            <MotionDiv
+              key={p.id}
+              className="group bg-white rounded-3xl overflow-hidden border border-[#E6EEF7] shadow-[0_4px_6px_-2px_rgba(16,24,40,0.08),0_12px_16px_-4px_rgba(16,24,40,0.10)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_20px_-6px_rgba(16,24,40,0.16)] hover:ring-1 hover:ring-[#008AD2]/30"
+            >
+              <div className="relative aspect-4/3 overflow-hidden bg-gray-100">
+                {p.images && p.images.length > 0 && p.images[0].imageUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={p.images[0].imageUrl}
+                    alt={p.title}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-gray-400">
+                    No Image
+                  </div>
+                )}
               </div>
 
-              <h3 className={`${poppins.className} mt-1 text-[18px] md:text-[20px] font-semibold text-[#101828]`}>
-                {p.title}
-              </h3>
+              <div className="p-5 md:p-6">
+                <div className="inline-flex items-center rounded-full bg-[#F2F7FB] text-[#0B2C3D] border border-[#E6EEF7] px-3 py-1 text-xs">
+                  {p.category.name}
+                </div>
 
-              <div className="mt-5 border-t border-[#E6EEF7] pt-4 flex items-center justify-between">
-                <div className={`${poppins.className} text-[18px] font-semibold text-[#0B2C3D]`}>
-                  {fmt.format(p.price)}
+                <h3 className={`${poppins.className} mt-1 text-[18px] md:text-[20px] font-semibold text-[#101828]`}>
+                  {p.title}
+                </h3>
+
+                <div className="mt-5 border-t border-[#E6EEF7] pt-4 flex items-center justify-between">
+                  <div className={`${poppins.className} text-[18px] font-semibold text-[#0B2C3D]`}>
+                    {fmt.format(p.price)}
+                  </div>
+                </div>
+
+                <div className="mt-4 flex items-center gap-3">
+                  <Link
+                    href={`/products/${p.id}`}
+                    className={`${poppins.className} inline-flex justify-center w-full md:w-auto px-4 py-2.5 rounded-full bg-[#101828] text-white hover:bg-[#0b1526]`}
+                  >
+                    View Details
+                  </Link>
+
+                  <button
+                    onClick={() => {
+                      setEnquiryFor({ id: p.id, title: p.title });
+                      setOpen(true);
+                    }}
+                    className={`${poppins.className} inline-flex justify-center w-full md:w-auto px-4 py-2.5 rounded-full border border-[#E6EEF7] hover:bg-gray-50`}
+                  >
+                    Enquire Now
+                  </button>
                 </div>
               </div>
-
-              <div className="mt-4 flex items-center gap-3">
-                <Link
-                  href={`/products/${p.id}`}
-                  className={`${poppins.className} inline-flex justify-center w-full md:w-auto px-4 py-2.5 rounded-full bg-[#101828] text-white hover:bg-[#0b1526]`}
-                >
-                  View Details
-                </Link>
-
-                <button
-                  onClick={() => {
-                    setEnquiryFor({ id: p.id, title: p.title });
-                    setOpen(true);
-                  }}
-                  className={`${poppins.className} inline-flex justify-center w-full md:w-auto px-4 py-2.5 rounded-full border border-[#E6EEF7] hover:bg-gray-50`}
-                >
-                  Enquire Now
-                </button>
-              </div>
-            </div>
-          </MotionDiv>
-        ))}
-      </div>
+            </MotionDiv>
+          ))}
+        </div>
       )}
 
       <EnquiryModal product={enquiryFor} open={open} onClose={() => setOpen(false)} />

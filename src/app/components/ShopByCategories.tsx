@@ -106,7 +106,7 @@ export default function ShopByCategories() {
               {categories.map((c) => (
                 <Link
                   key={c.id}
-                  href={`/products?category=${encodeURIComponent(c.slug)}`}
+                  href={`/products?categoryId=${c.id}`}
                   className="group block"
                 >
                   <div className="relative aspect-3/3 rounded-2xl overflow-hidden shadow-sm ring-1 ring-black/5">
@@ -158,7 +158,7 @@ export default function ShopByCategories() {
                     className="min-w-full flex-shrink-0 px-4"
                   >
                     <Link
-                      href={`/products?category=${encodeURIComponent(c.slug)}`}
+                      href={`/products?categoryId=${c.id}`}
                       className="group block"
                     >
                       <div className="relative aspect-square rounded-2xl overflow-hidden shadow-sm ring-1 ring-black/5 max-w-md mx-auto">
