@@ -73,3 +73,21 @@ export interface GetCategoriesParams {
   limit?: number;
   search?: string;
 }
+
+
+// ============================================
+// GALLERY TYPES
+// ============================================
+
+export interface GalleryImage {
+  id: string;
+  imageKey: string;
+  imageUrl: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface GetGalleryParams {
+  page?: number;
+  limit?: number;
+}
