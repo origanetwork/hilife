@@ -1,12 +1,110 @@
 'use client'
 
-import Image from 'next/image'
 import { Poppins } from 'next/font/google'
 import { MotionSection } from './Motion'
+import { useCreateContact } from '@/service'
+import { useState } from 'react'
+
 
 const poppins = Poppins({ weight: ['400', '500', '600'], subsets: ['latin'], display: 'swap' })
 
+const SUBJECT_OPTIONS = [
+  'General Enquiry',
+  'Product Information',
+  'Dealer Enquiry',
+  'Support',
+]
+
 export default function ContactUs() {
+
+  const { submitContact, isLoading, error } = useCreateContact()
+
+  const [form, setForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    subject: 'General Enquiry',
+    message: '',
+  })
+
+  type FieldErrors = Partial<Record<
+    'firstName' | 'email' | 'phone' | 'subject' | 'message',
+    string
+  >>
+
+  const [errors, setErrors] = useState<FieldErrors>({})
+  const [success, setSuccess] = useState<string | null>(null)
+
+  const validateForm = (): FieldErrors => {
+    const newErrors: FieldErrors = {}
+
+    if (!form.firstName.trim()) {
+      newErrors.firstName = 'First name is required'
+    }
+
+    if (!form.phone.trim()) {
+      newErrors.phone = 'Phone number is required'
+    }
+
+    if (!form.subject.trim()) {
+      newErrors.subject = 'Please select a subject'
+    }
+
+    if (!form.message.trim()) {
+      newErrors.message = 'Message is required'
+    }
+
+    // Email is optional
+    if (form.email.trim()) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(form.email.trim())) {
+        newErrors.email = 'Please enter a valid email address'
+      }
+    }
+
+    return newErrors
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => { setForm({ ...form, [e.target.name]: e.target.value }) }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setErrors({})
+    setSuccess(null)
+
+    const validationErrors = validateForm()
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors)
+      return
+    }
+
+    try {
+      const res = await submitContact({
+        firstName: form.firstName.trim(),
+        lastName: form.lastName.trim() || undefined,
+        email: form.email.trim() || undefined,
+        phone: form.phone.trim(),
+        subject: form.subject,
+        message: form.message.trim(),
+      })
+
+      setSuccess(res.message || 'Message sent successfully')
+
+      setForm({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        subject: 'General Enquiry',
+        message: '',
+      })
+    } catch (err: any) {
+      setErrors({ message: err?.message || 'Submission failed' })
+    }
+  }
+
   return (
     <MotionSection id="contact" className="w-full px-4 md:px-6 lg:px-8 py-6 md:py-5 scroll-mt-28 md:scroll-mt-36">
       <div className=" flex justify-center max-w-7xl mx-auto">
@@ -20,7 +118,7 @@ export default function ContactUs() {
           <div className="grid grid-cols-1 md:grid-cols-5">
             <div className="relative md:col-span-2 bg-[#011C2B] text-white p-7 sm:p-8 md:p-9 lg:p-10 pb-24 md:pb-10">
               <div className={`${poppins.className}`}>
-                <div className="text-white text-[20px] md:text-[22px] font-semibold">We're Here to Help You Sleep Better</div>
+                <div className="text-white text-[20px] md:text-[22px] font-semibold">We are Here to Help You Sleep Better</div>
                 <div className="mt-2 text-[#D1D5DB] text-[14px]">Your comfort is just a message away.</div>
                 <div className="mt-8 space-y-5 text-[14px]">
                   <div className="flex items-center gap-3">
@@ -64,57 +162,129 @@ export default function ContactUs() {
             </div>
 
             <div className="md:col-span-3 p-7 sm:p-8 md:p-9 lg:p-10">
-              <form className={`${poppins.className} grid grid-cols-1 gap-6`}>
+              <form
+                onSubmit={handleSubmit}
+                className={`${poppins.className} grid grid-cols-1 gap-6`}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm text-[#667085]">First Name</label>
-                    <input type="text" className="mt-2 w-full bg-transparent border-0 border-b border-[#D0D5DD] focus:border-[#008AD2] focus:outline-none py-2 text-[#101828]" placeholder="John" />
+                    <input
+                      name="firstName"
+                      value={form.firstName}
+                      onChange={handleChange}
+                      type="text"
+                      className="mt-2 w-full bg-transparent border-0 border-b border-[#D0D5DD] focus:border-[#008AD2] focus:outline-none py-2 text-[#101828]"
+                      placeholder="John"
+                    />
+                    {errors.firstName && (
+                      <p className="text-red-600 text-xs mt-1">
+                        {errors.firstName}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-sm text-[#667085]">Last Name</label>
-                    <input type="text" className="mt-2 w-full bg-transparent border-0 border-b border-[#D0D5DD] focus:border-[#008AD2] focus:outline-none py-2 text-[#101828]" placeholder="Doe" />
+                    <input
+                      name="lastName"
+                      value={form.lastName}
+                      onChange={handleChange}
+                      type="text"
+                      className="mt-2 w-full bg-transparent border-0 border-b border-[#D0D5DD] focus:border-[#008AD2] focus:outline-none py-2 text-[#101828]"
+                      placeholder="Doe"
+                    />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm text-[#667085]">Email</label>
-                    <input type="email" className="mt-2 w-full bg-transparent border-0 border-b border-[#D0D5DD] focus:border-[#008AD2] focus:outline-none py-2 text-[#101828]" placeholder="you@example.com" />
+                    <input
+                      name="email"
+                      type="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      className="mt-2 w-full bg-transparent border-0 border-b border-[#D0D5DD] focus:border-[#008AD2] focus:outline-none py-2 text-[#101828]"
+                      placeholder="you@example.com"
+                    />
+                    {errors.email && (
+                      <p className="text-red-600 text-xs mt-1">{errors.email}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-sm text-[#667085]">Phone Number</label>
-                    <input type="tel" className="mt-2 w-full bg-transparent border-0 border-b border-[#D0D5DD] focus:border-[#008AD2] focus:outline-none py-2 text-[#101828]" placeholder="+1 012 3456 789" />
+                    <input
+                      name="phone"
+                      value={form.phone}
+                      onChange={handleChange}
+                      type="tel"
+                      className="mt-2 w-full bg-transparent border-0 border-b border-[#D0D5DD] focus:border-[#008AD2] focus:outline-none py-2 text-[#101828]"
+                      placeholder="+1 012 3456 789"
+                    />
+                    {errors.phone && (
+                      <p className="text-red-600 text-xs mt-1">{errors.phone}</p>
+                    )}
                   </div>
                 </div>
 
                 <div>
                   <div className="text-sm text-[#667085]">Select Subject?</div>
                   <div className="mt-3 flex flex-wrap gap-x-6 gap-y-3 text-[14px] text-[#101828]">
-                    <label className="inline-flex items-center gap-2"><input type="radio" name="subject" className="accent-[#008AD2]" defaultChecked /> General Inquiry</label>
-                    <label className="inline-flex items-center gap-2"><input type="radio" name="subject" className="accent-[#008AD2]" /> General Inquiry</label>
-                    <label className="inline-flex items-center gap-2"><input type="radio" name="subject" className="accent-[#008AD2]" /> General Inquiry</label>
-                    <label className="inline-flex items-center gap-2"><input type="radio" name="subject" className="accent-[#008AD2]" /> General Inquiry</label>
+                    {SUBJECT_OPTIONS.map((option) => (
+                      <label
+                        key={option}
+                        className="inline-flex items-center gap-2 cursor-pointer"
+                      >
+                        <input
+                          type="radio"
+                          name="subject"
+                          value={option}
+                          checked={form.subject === option}
+                          onChange={handleChange}
+                          className="accent-[#008AD2]"
+                        />
+                        {option}
+                      </label>
+                    ))}
+                    {errors.subject && (
+                      <p className="text-red-600 text-xs mt-2">{errors.subject}</p>
+                    )}
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-sm text-[#667085]">Message</label>
-                  <textarea rows={4} className="mt-2 w-full bg-transparent border-0 border-b border-[#D0D5DD] focus:border-[#008AD2] focus:outline-none py-2 text-[#101828] resize-none" placeholder="Write your message..."></textarea>
+                  <textarea
+                    name="message"
+                    value={form.message}
+                    onChange={handleChange}
+                    rows={4}
+                    className="mt-2 w-full bg-transparent border-0 border-b border-[#D0D5DD] focus:border-[#008AD2] focus:outline-none py-2 text-[#101828] resize-none"
+                    placeholder="Write your message..."
+                  />
+                  {errors.message && (
+                    <p className="text-red-600 text-xs mt-1">{errors.message}</p>
+                  )}
                 </div>
 
+                {error && <p className="text-red-600 text-sm">{error}</p>}
+
+                {success && (
+                  <p className="text-green-600 text-sm">{success}</p>
+                )}
                 <div className="flex justify-end">
-                  <button type="button" className="inline-flex items-center gap-2 rounded-full bg-[#0A4A6A] hover:bg-[#083C55] text-white px-6 py-3">
-                    <span>Send Message</span>
-                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/20">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor"><path d="M13.19 3.14a1 1 0 0 1 1.32-.45l6.3 3.15a1 1 0 0 1 .02 1.8l-6.3 3.26a1 1 0 0 1-1.38-.53l-.52-1.31-4.39 2.94 4.27 2.16.56-1.4a1 1 0 0 1 1.38-.56l6.38 3.23a1 1 0 0 1-.02 1.8l-6.38 3.3a1 1 0 0 1-1.36-.47l-1.04-2.02-4.8-2.43-3.7 2.48a1 1 0 0 1-1.52-.84V8.47a1 1 0 0 1 .47-.85l4.31-2.77a1 1 0 0 1 1.03-.02l4.17 2.08 1.06 2.12-3.1-1.55L6 9.28v7.89l2.26-1.52 5.08 2.57 1.85 3.6" /></svg>
-                    </span>
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="rounded-full bg-[#0A4A6A] text-white px-6 py-3 disabled:opacity-60"
+                  >
+                    {isLoading ? 'Sending...' : 'Send Message'}
                   </button>
                 </div>
               </form>
             </div>
           </div>
         </div>
-      </div>
-    </MotionSection>
+      </div >
+    </MotionSection >
   )
 }

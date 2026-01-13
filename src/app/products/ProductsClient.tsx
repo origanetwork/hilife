@@ -207,7 +207,7 @@ export default function ProductsClient() {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={p.images[0].imageUrl}
-                    alt={p.title}
+                    alt={p.name}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 ) : (
@@ -223,7 +223,7 @@ export default function ProductsClient() {
                 </div>
 
                 <h3 className={`${poppins.className} mt-1 text-[18px] md:text-[20px] font-semibold text-[#101828]`}>
-                  {p.title}
+                  {p.name}
                 </h3>
 
                 <div className="mt-5 border-t border-[#E6EEF7] pt-4 flex items-center justify-between">
@@ -242,7 +242,7 @@ export default function ProductsClient() {
 
                   <button
                     onClick={() => {
-                      setEnquiryFor({ id: p.id, title: p.title });
+                      setEnquiryFor({ id: p.id, title: p.name });
                       setOpen(true);
                     }}
                     className={`${poppins.className} inline-flex justify-center w-full md:w-auto px-4 py-2.5 rounded-full border border-[#E6EEF7] hover:bg-gray-50`}

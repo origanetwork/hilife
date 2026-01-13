@@ -13,6 +13,8 @@ import type {
   GetGalleryParams,
   Product,
   GetProductsParams,
+  Contact,
+  CreateContactRequest,
 } from "../types";
 
 import {
@@ -22,6 +24,7 @@ import {
   getGalleryImagesApi,
   getAllProductsApi,
   getProductApi,
+  createContactApi,
 } from "./api";
 
 // ============================================
@@ -217,4 +220,32 @@ export function useGetProduct(id: string) {
   }, [id]);
 
   return { data, isLoading, error };
+}
+
+
+export function useCreateContact() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [data, setData] = useState<Contact | null>(null);
+
+  const submitContact = async (payload: CreateContactRequest) => {
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      const response: ApiResponse<Contact> = await createContactApi(payload);
+      setData(response.data);
+
+      return response;
+    } catch (err: any) {
+      const message =
+        err?.response?.data?.message || "Failed to submit contact form";
+      setError(message);
+      throw new Error(message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return { submitContact, isLoading, error, data };
 }

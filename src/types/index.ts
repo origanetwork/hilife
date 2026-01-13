@@ -152,3 +152,25 @@ export interface GetProductsParams {
   categoryId?: string;
   sortBy?: "price-asc" | "price-desc" | "newest";
 }
+
+// ================= CONTACT =================
+
+export interface CreateContactRequest {
+  firstName: string;
+  lastName?: string;
+  email: string | undefined;
+  phone: string;
+  subject: string;
+  message: string;
+}
+
+export interface Contact {
+  id: string;
+  firstName: string;
+  lastName: string | null;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+  createdAt: string;
+}

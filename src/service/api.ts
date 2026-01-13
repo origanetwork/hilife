@@ -7,6 +7,8 @@ import type {
   Category,
   GalleryImage,
   Product,
+  CreateContactRequest,
+  Contact,
 } from "../types";
 
 // ============================================
@@ -42,3 +44,17 @@ export const getAllProductsApi = (params?: Record<string, any>) =>
 
 export const getProductApi = (id: string) =>
   axiosInstance.get<ApiResponse<Product>>(`/v1/user/product/${id}`);
+
+// ============================================
+// CONTACT APIs
+// ============================================
+
+export const createContactApi = async (
+  payload: CreateContactRequest
+): Promise<ApiResponse<Contact>> => {
+  const response = await axiosInstance.post<ApiResponse<Contact>>(
+    "/v1/user/contact",
+    payload
+  );
+  return response.data;
+};
