@@ -25,7 +25,28 @@ export default function ProductDetailClient({ product }: Props) {
 
   const addToCart = () => {
     if (typeof window !== "undefined") {
-      alert(`${product.name} added to cart (demo).`);
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+      // Check if product already exists in cart
+      const existingIndex = cart.findIndex((item: any) => item.id === product.id);
+
+      if (existingIndex !== -1) {
+        // Increase quantity if already in cart
+        cart[existingIndex].quantity += 1;
+      } else {
+        // Add new item to cart
+        cart.push({
+          id: product.id,
+          title: product.name,
+          price: product.price,
+          image: imageUrls.length > 0 ? imageUrls[0] : "/assets/products/placeholder.jpg",
+          category: product.category.name,
+          quantity: 1,
+        });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${product.name} added to cart!`);
     }
   };
 
@@ -183,7 +204,7 @@ export default function ProductDetailClient({ product }: Props) {
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
-            Enquire Now
+            Buy Now
           </button>
         </div>
       </div>

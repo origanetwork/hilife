@@ -1,11 +1,11 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Poppins } from "next/font/google";
 import { FiTrash2, FiMinus, FiPlus, FiShoppingBag, FiArrowLeft, FiTag } from "react-icons/fi";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import EnquiryModal from "../components/EnquiryModal";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -25,30 +25,34 @@ interface CartItem {
 }
 
 export default function CartPage() {
-  // Sample cart items (in a real app, this would come from context/state management)
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    {
-      id: "1",
-      title: "Premium Orthopedic Mattress",
-      price: 25000,
-      image: "/assets/products/p1.jpg",
-      category: "Medicated Mattress",
-      quantity: 1,
-      size: "Queen",
-    },
-    {
-      id: "2",
-      title: "Memory Foam Pillow",
-      price: 3500,
-      image: "/assets/products/p2.jpg",
-      category: "Pillows",
-      quantity: 2,
-    },
-  ]);
-
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [promoCode, setPromoCode] = useState("");
   const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
   const [promoDiscount, setPromoDiscount] = useState(0);
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Load cart items from localStorage on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedCart = localStorage.getItem("cart");
+      if (savedCart) {
+        try {
+          setCartItems(JSON.parse(savedCart));
+        } catch (error) {
+          console.error("Failed to parse cart data:", error);
+        }
+      }
+      setIsLoaded(true);
+    }
+  }, []);
+
+  // Save cart to localStorage whenever it changes (but only after initial load)
+  useEffect(() => {
+    if (isLoaded && typeof window !== "undefined") {
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+    }
+  }, [cartItems, isLoaded]);
 
   const fmt = useMemo(
     () =>
@@ -164,12 +168,11 @@ export default function CartPage() {
                     <div className="flex gap-4 md:gap-6">
                       {/* Product Image */}
                       <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0 bg-gray-100">
-                        <Image
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                           src={item.image}
                           alt={item.title}
-                          fill
-                          sizes="128px"
-                          className="object-cover"
+                          className="w-full h-full object-cover"
                         />
                       </div>
 
@@ -328,6 +331,7 @@ export default function CartPage() {
 
                   {/* Checkout Button */}
                   <button
+                    onClick={() => setEnquiryOpen(true)}
                     className={`${poppins.className} w-full mt-6 px-6 py-3.5 rounded-full bg-[#008AD2] text-white hover:bg-[#0095e6] font-semibold shadow-md hover:shadow-lg transition-all`}
                   >
                     Proceed to Checkout
@@ -361,6 +365,13 @@ export default function CartPage() {
       </section>
 
       <Footer />
+
+      {/* Enquiry Modal for checkout */}
+      <EnquiryModal
+        product={cartItems.length > 0 ? { id: "cart-checkout", title: "Cart Checkout Enquiry" } : null}
+        open={enquiryOpen}
+        onClose={() => setEnquiryOpen(false)}
+      />
     </main>
   );
 }

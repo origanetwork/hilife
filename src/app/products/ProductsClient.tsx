@@ -108,8 +108,8 @@ export default function ProductsClient() {
           <button
             onClick={() => setActiveCategoryId(undefined)}
             className={`${poppins.className} inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition border ${!activeCategoryId
-                ? "bg-[#008AD2] text-white border-[#008AD2]"
-                : "bg-white text-[#0B2C3D] border-[#E4E7EC] hover:border-[#008AD2] hover:text-[#008AD2]"
+              ? "bg-[#008AD2] text-white border-[#008AD2]"
+              : "bg-white text-[#0B2C3D] border-[#E4E7EC] hover:border-[#008AD2] hover:text-[#008AD2]"
               }`}
           >
             All
@@ -121,8 +121,8 @@ export default function ProductsClient() {
               key={c.id}
               onClick={() => setActiveCategoryId(c.id)}
               className={`${poppins.className} inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition border ${activeCategoryId === c.id
-                  ? "bg-[#008AD2] text-white border-[#008AD2]"
-                  : "bg-white text-[#0B2C3D] border-[#E4E7EC] hover:border-[#008AD2] hover:text-[#008AD2]"
+                ? "bg-[#008AD2] text-white border-[#008AD2]"
+                : "bg-white text-[#0B2C3D] border-[#E4E7EC] hover:border-[#008AD2] hover:text-[#008AD2]"
                 }`}
             >
               {c.name}
@@ -232,23 +232,63 @@ export default function ProductsClient() {
                   </div>
                 </div>
 
-                <div className="mt-4 flex items-center gap-3">
+                <div className="mt-4 flex flex-col gap-2">
+
+
+                  <div className="flex items-center gap-2">
+
+                    <button
+                      onClick={() => {
+                        if (typeof window !== "undefined") {
+                          const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+                          // Check if product already exists in cart
+                          const existingIndex = cart.findIndex((item: any) => item.id === p.id);
+
+                          if (existingIndex !== -1) {
+                            // Increase quantity if already in cart
+                            cart[existingIndex].quantity += 1;
+                          } else {
+                            // Add new item to cart
+                            cart.push({
+                              id: p.id,
+                              title: p.name,
+                              price: p.price,
+                              image: p.images && p.images.length > 0 ? p.images[0].imageUrl : "/assets/products/placeholder.jpg",
+                              category: p.category.name,
+                              quantity: 1,
+                            });
+                          }
+
+                          localStorage.setItem("cart", JSON.stringify(cart));
+                          alert(`${p.name} added to cart!`);
+                        }
+                      }}
+                      className={`${poppins.className} inline-flex justify-center items-center gap-2 w-full px-4 py-2.5 rounded-full bg-[#101828] text-white hover:bg-[#0b1526] transition-colors`}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                      </svg>
+                      Add to Cart
+                    </button>
+                    <button
+                      onClick={() => {
+                        setEnquiryFor({ id: p.id, title: p.name });
+                        setOpen(true);
+                      }}
+                      className={`${poppins.className} inline-flex justify-center w-full px-4 py-2.5 rounded-full border border-[#008AD2] text-[#008AD2] hover:bg-[#008AD2]/5 transition-all duration-200`}
+                    >
+                      Buy Now
+                    </button>
+                  </div>
+
                   <Link
                     href={`/products/${p.id}`}
-                    className={`${poppins.className} inline-flex justify-center w-full md:w-auto px-4 py-2.5 rounded-full bg-[#101828] text-white hover:bg-[#0b1526]`}
+                    className={`${poppins.className} inline-flex justify-center w-full px-4 py-2.5 rounded-full border border-[#E6EEF7] hover:bg-gray-50 transition-colors`}
                   >
                     View Details
                   </Link>
 
-                  <button
-                    onClick={() => {
-                      setEnquiryFor({ id: p.id, title: p.name });
-                      setOpen(true);
-                    }}
-                    className={`${poppins.className} inline-flex justify-center w-full md:w-auto px-4 py-2.5 rounded-full border border-[#E6EEF7] hover:bg-gray-50`}
-                  >
-                    Enquire Now
-                  </button>
                 </div>
               </div>
             </MotionDiv>
