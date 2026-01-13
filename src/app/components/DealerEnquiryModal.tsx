@@ -96,7 +96,7 @@ export default function DealerEnquiryModal({ open, onClose }: Props) {
             )}
 
             <div>
-              <label className="block text-sm text-[#667085]">Name</label>
+              <label className="block text-sm text-[#667085]">Shop Name</label>
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}

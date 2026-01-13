@@ -12,10 +12,11 @@ const poppins = Poppins({
 
 const insights = [
   {
+    id: "1",
     src: "/assets/insight/1.jpg",
     title: "Lorem ipsum dolor sit am",
     excerpt:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus interdum, felis ac tincidunt congue, nibh odio vehicula augue, nec hendrerit nisl sapien ut nunc.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
     author: {
       name: "Olivia Rhye",
       date: "20 Jan 2022",
@@ -23,10 +24,11 @@ const insights = [
     },
   },
   {
+    id: "2",
     src: "/assets/insight/2.jpg",
     title: "Lorem ipsum dolor sit am",
     excerpt:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus interdum, felis ac tincidunt congue, nibh odio vehicula augue, nec hendrerit nisl sapien ut nunc.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
     author: {
       name: "Phoenix Baker",
       date: "19 Jan 2022",
@@ -34,10 +36,11 @@ const insights = [
     },
   },
   {
+    id: "3",
     src: "/assets/insight/3.jpg",
     title: "Lorem ipsum dolor sit am",
     excerpt:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus interdum, felis ac tincidunt congue, nibh odio vehicula augue, nec hendrerit nisl sapien ut nunc.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
     author: {
       name: "Lana Steiner",
       date: "18 Jan 2022",
@@ -45,6 +48,7 @@ const insights = [
     },
   },
 ];
+
 
 export default function InsightSection() {
   return (
@@ -67,7 +71,7 @@ export default function InsightSection() {
             >
           {insights.map((item) => (
             <article
-              key={item.title}
+              key={item.id}
               className="snap-center shrink-0 w-[85%] max-w-[340px] sm:w-[360px] bg-white rounded-[20px] overflow-hidden flex flex-col"
               style={{
                 boxShadow:
@@ -125,7 +129,7 @@ export default function InsightSection() {
         <div className="hidden md:grid max-w-7xl mx-auto grid-cols-3 gap-x-6 gap-y-16">
           {insights.map((item) => (
             <article
-              key={item.title}
+              key={item.id}
               className="bg-white rounded-[20px] overflow-hidden flex flex-col"
               style={{
                 boxShadow:

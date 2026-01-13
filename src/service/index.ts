@@ -5,7 +5,9 @@ import type {
   Dealer,
   CreateDealerRequest,
   DealerRequest,
-  GetDealersParams
+  GetDealersParams,
+  Category,
+  GetCategoriesParams
 } from '../types';
 
 // ============================================
@@ -90,4 +92,54 @@ export function useCreateDealer() {
   };
 
   return { createDealer, isLoading, error, data };
+}
+
+
+// ============================================
+// CATEGORY HOOKS
+// ============================================
+
+export function useGetCategories(params?: GetCategoriesParams) {
+  const [data, setData] = useState<ApiResponse<Category[]> | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function fetchCategories() {
+      try {
+        setIsLoading(true);
+        setError(null);
+
+        const queryParams: Record<string, string | number> = {};
+        if (params?.page) queryParams.page = params.page;
+        if (params?.limit) queryParams.limit = params.limit;
+        if (params?.search) queryParams.search = params.search;
+
+        const response = await axiosInstance.get<ApiResponse<Category[]>>(
+          '/v1/user/category',
+          { params: queryParams }
+        );
+
+        if (isMounted) {
+          setData(response.data);
+          setIsLoading(false);
+        }
+      } catch (err) {
+        if (isMounted) {
+          setError(err instanceof Error ? err : new Error('Failed to fetch categories'));
+          setIsLoading(false);
+        }
+      }
+    }
+
+    fetchCategories();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [params?.page, params?.limit, params?.search]);
+
+  return { data, isLoading, error };
 }

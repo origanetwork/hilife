@@ -52,3 +52,24 @@ export interface GetDealersParams {
   status?: boolean;
   location?: string;
 }
+
+// ============================================
+// CATEGORY TYPES
+// ============================================
+
+export interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  imageUrl: string | null;
+  createdAt: string;
+  _count: {
+    products: number;
+  };
+}
+
+export interface GetCategoriesParams {
+  page?: number;
+  limit?: number;
+  search?: string;
+}
