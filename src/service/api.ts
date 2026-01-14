@@ -14,6 +14,7 @@ import type {
   TestimonialsResponse,
   LatestBlogsResponse,
   Blog,
+  BannerResponse,
 } from "../types";
 
 // DEALER APIs
@@ -96,4 +97,12 @@ export const fetchBlogs = async (params: Record<string, any>): Promise<LatestBlo
 export const fetchBlogById = async (id: string): Promise<Blog> => {
   const res = await axiosInstance.get(`/v1/user/blog/${id}`)
   return res.data.data
+}
+
+
+// BANNER APIs
+
+export const fetchBanners = async (): Promise<BannerResponse> => {
+  const res = await axiosInstance.get('/v1/user/banners')
+  return res.data
 }

@@ -267,3 +267,20 @@ export interface Blog {
   createdAt: string
   updatedAt: string
 }
+
+
+// ================= BANNER =================
+
+export interface Banner {
+  id: string
+  title: string
+  imageUrl: string
+  buttonText: string
+  link: string
+  createdAt: string
+}
+
+export interface BannerResponse {
+  message: string
+  data: Banner[]
+}

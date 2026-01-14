@@ -17,6 +17,7 @@ import type {
   CreateContactRequest,
   Testimonial,
   Blog,
+  Banner,
 } from "../types";
 
 import {
@@ -30,6 +31,7 @@ import {
   fetchTestimonials,
   fetchBlogs,
   fetchBlogById,
+  fetchBanners,
 } from "./api";
 
 // ============================================
@@ -416,6 +418,38 @@ export const useBlog = (id: string) => {
       mounted = false
     }
   }, [id])
+
+  return { data, isLoading, error }
+}
+
+
+export const useBanners = () => {
+  const [data, setData] = useState<Banner[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    let mounted = true
+
+    const load = async () => {
+      try {
+        setIsLoading(true)
+        const res = await fetchBanners()
+        if (mounted) setData(res.data)
+      } catch (err: any) {
+        if (mounted) {
+          setError(err?.message || 'Failed to load banners')
+        }
+      } finally {
+        if (mounted) setIsLoading(false)
+      }
+    }
+
+    load()
+    return () => {
+      mounted = false
+    }
+  }, [])
 
   return { data, isLoading, error }
 }
