@@ -15,6 +15,7 @@ import type {
   GetProductsParams,
   Contact,
   CreateContactRequest,
+  Testimonial,
 } from "../types";
 
 import {
@@ -25,6 +26,7 @@ import {
   getAllProductsApi,
   getProductApi,
   createContactApi,
+  fetchTestimonials,
 } from "./api";
 
 // ============================================
@@ -248,4 +250,46 @@ export function useCreateContact() {
   };
 
   return { submitContact, isLoading, error, data };
+}
+
+
+
+// ============================================
+// TESTIMONIAL HOOKS
+// ============================================
+
+export const useTestimonials = (page = 1, limit = 10) => {
+  const [data, setData] = useState<Testimonial[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    let mounted = true
+
+    const load = async () => {
+      try {
+        setIsLoading(true)
+        const res = await fetchTestimonials(page, limit)
+
+        if (mounted) {
+          setData(res.data)
+        }
+      } catch (err: any) {
+        if (mounted) {
+          setError(err?.message || 'Failed to load testimonials')
+        }
+      } finally {
+        if (mounted) {
+          setIsLoading(false)
+        }
+      }
+    }
+
+    load()
+    return () => {
+      mounted = false
+    }
+  }, [page, limit])
+
+  return { data, isLoading, error }
 }

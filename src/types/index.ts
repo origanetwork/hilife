@@ -208,3 +208,27 @@ export interface Order {
   createdAt: string;
   updatedAt: string;
 }
+
+
+// ================= TESTIMONIAL =================
+
+export interface Testimonial {
+  id: string
+  name: string
+  position?: string | null
+  content: string
+  rating: number
+  imageUrl: string
+  createdAt: string
+}
+
+export interface TestimonialsResponse {
+  message: string
+  data: Testimonial[]
+  pagination: {
+    total: number
+    page: number
+    limit: number
+    totalPages: number
+  }
+}

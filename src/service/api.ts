@@ -11,6 +11,7 @@ import type {
   Contact,
   CreateOrderRequest,
   Order,
+  TestimonialsResponse,
 } from "../types";
 
 // ============================================
@@ -74,3 +75,19 @@ export const createOrderApi = async (
   );
   return response.data;
 };
+
+
+// ============================================
+// TESTIMONIAL APIs
+// ============================================
+
+export const fetchTestimonials = async (
+  page = 1,
+  limit = 10
+): Promise<TestimonialsResponse> => {
+  const res = await axiosInstance.get('/v1/user/testimonial', {
+    params: { page, limit },
+  })
+
+  return res.data
+}
