@@ -82,7 +82,7 @@ export interface GetCategoriesParams {
 export interface GalleryImage {
   id: string;
   imageKey: string;
-  imageUrl: string | null;
+  imageUrl: string;
   createdAt: string;
   updatedAt: string;
 }

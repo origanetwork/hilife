@@ -48,15 +48,27 @@ export default function GalleryLightbox({ images }: Props) {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        {images.slice(0, visibleCount).map((src, i) => (
-          <MotionDiv
-            key={src}
-            className="relative rounded-2xl overflow-hidden bg-white border border-black/10 shadow-[0_4px_6px_-2px_rgba(16,24,40,0.08),0_12px_16px_-4px_rgba(16,24,40,0.10)] aspect-square cursor-pointer"
-            onClick={() => openAt(i)}
-          >
-            <Image src={src} alt="Gallery" fill sizes="(min-width:1024px) 25vw, (min-width:640px) 33vw, 50vw" className="object-cover" />
-          </MotionDiv>
-        ))}
+        {images.slice(0, visibleCount).map((src, i) => {
+          if (!src.startsWith('http') && !src.startsWith('/')) {
+            return null // ⛔ skip invalid URLs
+          }
+
+          return (
+            <MotionDiv
+              key={`${src}-${i}`}
+              className="relative rounded-2xl overflow-hidden bg-white border border-black/10 shadow aspect-square cursor-pointer"
+              onClick={() => openAt(i)}
+            >
+              <Image
+                src={src}
+                alt="Gallery"
+                fill
+                sizes="(min-width:1024px) 25vw, (min-width:640px) 33vw, 50vw"
+                className="object-cover"
+              />
+            </MotionDiv>
+          )
+        })}
       </MotionDiv>
 
       {visibleCount < images.length && (

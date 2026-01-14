@@ -186,7 +186,7 @@ export default function About() {
                   </svg>
                 </div>
                 <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1.5 tracking-tight">
-                  100+
+                  200+
                 </div>
                 <div className={`${poppins.className} text-xs md:text-sm text-white/90 font-semibold uppercase tracking-wide`}>
                   Dealers
@@ -211,7 +211,7 @@ export default function About() {
                   </svg>
                 </div>
                 <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1.5 tracking-tight">
-                  10K+
+                  1 Lakh+
                 </div>
                 <div className={`${poppins.className} text-xs md:text-sm text-white/90 font-semibold uppercase tracking-wide`}>
                   Happy Customers
@@ -236,7 +236,7 @@ export default function About() {
                   </svg>
                 </div>
                 <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1.5 tracking-tight">
-                  50+
+                  100+
                 </div>
                 <div className={`${poppins.className} text-xs md:text-sm text-white/90 font-semibold uppercase tracking-wide`}>
                   Products
