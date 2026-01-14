@@ -12,11 +12,11 @@ import type {
   CreateOrderRequest,
   Order,
   TestimonialsResponse,
+  LatestBlogsResponse,
+  Blog,
 } from "../types";
 
-// ============================================
 // DEALER APIs
-// ============================================
 
 export const getDealersApi = (params?: Record<string, any>) =>
   axiosInstance.get<ApiResponse<Dealer[]>>("/v1/user/dealer", { params });
@@ -24,23 +24,17 @@ export const getDealersApi = (params?: Record<string, any>) =>
 export const createDealerApi = (data: CreateDealerRequest) =>
   axiosInstance.post<ApiResponse<DealerRequest>>("/v1/user/dealer", data);
 
-// ============================================
 // CATEGORY APIs
-// ============================================
 
 export const getCategoriesApi = (params?: Record<string, any>) =>
   axiosInstance.get<ApiResponse<Category[]>>("/v1/user/category", { params });
 
-// ============================================
 // GALLERY APIs
-// ============================================
 
 export const getGalleryImagesApi = (params?: Record<string, any>) =>
   axiosInstance.get<ApiResponse<GalleryImage[]>>("/v1/user/gallery", { params });
 
-// ============================================
 // PRODUCT APIs
-// ============================================
 
 export const getAllProductsApi = (params?: Record<string, any>) =>
   axiosInstance.get<ApiResponse<Product[]>>("/v1/user/product", { params });
@@ -48,9 +42,7 @@ export const getAllProductsApi = (params?: Record<string, any>) =>
 export const getProductApi = (id: string) =>
   axiosInstance.get<ApiResponse<Product>>(`/v1/user/product/${id}`);
 
-// ============================================
 // CONTACT APIs
-// ============================================
 
 export const createContactApi = async (
   payload: CreateContactRequest
@@ -62,9 +54,7 @@ export const createContactApi = async (
   return response.data;
 };
 
-// ============================================
 // ORDER APIs
-// ============================================
 
 export const createOrderApi = async (
   payload: CreateOrderRequest
@@ -77,9 +67,7 @@ export const createOrderApi = async (
 };
 
 
-// ============================================
 // TESTIMONIAL APIs
-// ============================================
 
 export const fetchTestimonials = async (
   page = 1,
@@ -90,4 +78,22 @@ export const fetchTestimonials = async (
   })
 
   return res.data
+}
+
+// BLOG APIs
+
+export const fetchBlogs = async (params: Record<string, any>): Promise<LatestBlogsResponse> => {
+  const res = await axiosInstance.get('/v1/user/blog', {
+    params: {
+      latest: true,
+      ...params
+    },
+  })
+
+  return res.data
+}
+
+export const fetchBlogById = async (id: string): Promise<Blog> => {
+  const res = await axiosInstance.get(`/v1/user/blog/${id}`)
+  return res.data.data
 }

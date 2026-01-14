@@ -1,7 +1,8 @@
 import Image from "next/image";
-import { 
+import {
   // Playfair_Display,
-   Poppins } from "next/font/google";
+  Poppins
+} from "next/font/google";
 import { MotionSection } from "./Motion";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaWhatsapp } from "react-icons/fa";
 
@@ -87,7 +88,7 @@ export default function Footer() {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-14 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          
+
           {/* Brand Section */}
           <div className="lg:col-span-3 text-left justify-start">
             <Image
@@ -169,7 +170,10 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-12 border-t border-white/20 pt-5 text-center text-sm text-white/70">
-          © {new Date().getFullYear()} Hilife Mattress | All Rights Reserved
+          <p>
+            © {new Date().getFullYear()} Hilife Mattress | All Rights Reserved
+          </p>
+          <p>Designed & Developed by <a href="https://www.origanetworks.com" className="text-white hover:underline">Origa Networks</a></p>
         </div>
       </div>
     </MotionSection>

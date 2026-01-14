@@ -16,6 +16,7 @@ import type {
   Contact,
   CreateContactRequest,
   Testimonial,
+  Blog,
 } from "../types";
 
 import {
@@ -27,6 +28,8 @@ import {
   getProductApi,
   createContactApi,
   fetchTestimonials,
+  fetchBlogs,
+  fetchBlogById,
 } from "./api";
 
 // ============================================
@@ -290,6 +293,129 @@ export const useTestimonials = (page = 1, limit = 10) => {
       mounted = false
     }
   }, [page, limit])
+
+  return { data, isLoading, error }
+}
+
+
+
+// ============================================
+// BLOGS HOOKS
+// ============================================
+
+
+export const useLatestBlogs = () => {
+  const [data, setData] = useState<Blog[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    let mounted = true
+
+    const load = async () => {
+      try {
+        setIsLoading(true)
+        const res = await fetchBlogs({ latest: true })
+
+        if (mounted) {
+          setData(res.data)
+        }
+      } catch (err: any) {
+        if (mounted) {
+          setError(err?.message || 'Failed to load blogs')
+        }
+      } finally {
+        if (mounted) {
+          setIsLoading(false)
+        }
+      }
+    }
+
+    load()
+
+    return () => {
+      mounted = false
+    }
+  }, [])
+
+  return { data, isLoading, error }
+}
+
+
+export const useAllBlogs = (
+  page = 1,
+  limit = 12
+) => {
+  const [data, setData] = useState<Blog[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    let mounted = true
+
+    const load = async () => {
+      try {
+        setIsLoading(true)
+
+        const res = await fetchBlogs({
+          latest: false,
+          page,
+          limit,
+        })
+
+        if (mounted) {
+          setData(res.data)
+        }
+      } catch (err: any) {
+        if (mounted) {
+          setError(err?.message || 'Failed to load blogs')
+        }
+      } finally {
+        if (mounted) {
+          setIsLoading(false)
+        }
+      }
+    }
+
+    load()
+
+    return () => {
+      mounted = false
+    }
+  }, [page, limit])
+
+  return { data, isLoading, error }
+}
+
+
+export const useBlog = (id: string) => {
+  const [data, setData] = useState<Blog | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!id) return
+
+    let mounted = true
+
+    const load = async () => {
+      try {
+        setIsLoading(true)
+        const blog = await fetchBlogById(id)
+        if (mounted) setData(blog)
+      } catch (err: any) {
+        if (mounted) setError(err?.message || 'Blog not found')
+      } finally {
+        if (mounted) setIsLoading(false)
+      }
+    }
+
+    load()
+
+    return () => {
+      mounted = false
+    }
+  }, [id])
 
   return { data, isLoading, error }
 }

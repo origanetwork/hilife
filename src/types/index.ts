@@ -232,3 +232,38 @@ export interface TestimonialsResponse {
     totalPages: number
   }
 }
+
+
+// ================= BLOGS =================
+
+export interface Blog {
+  id: string
+  title: string
+  tags?: string | null
+  content: string
+  author: string
+  imageUrl: string | null
+  createdAt: string
+  updatedAt: string
+}
+
+export interface LatestBlogsResponse {
+  data: Blog[]
+  meta: {
+    isLatest: boolean
+    count: number
+    maxCount: number
+  }
+}
+
+
+export interface Blog {
+  id: string
+  title: string
+  subtitle: string | null
+  content: string
+  author: string 
+  imageUrl: string | null
+  createdAt: string
+  updatedAt: string
+}
