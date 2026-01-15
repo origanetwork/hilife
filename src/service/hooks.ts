@@ -188,7 +188,7 @@ export function useGetProducts(params?: GetProductsParams) {
     return () => {
       mounted = false;
     };
-  }, [params?.page, params?.limit, params?.search, params?.categoryId, params?.sortBy]);
+  }, [params?.page, params?.limit, params?.search, params?.categoryId, params?.sortBy, params?.productType]);
 
   return { data, isLoading, error };
 }

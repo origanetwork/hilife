@@ -96,6 +96,8 @@ export interface GetGalleryParams {
 // PRODUCT TYPES
 // ============================================
 
+export type ProductType = 'NORMAL' | 'FEATURED' | 'POPULAR' | 'PREMIUM';
+
 export interface Product {
   id: string;
   name: string;
@@ -103,6 +105,7 @@ export interface Product {
   price: number;
   offerPrice?: number | null;
   categoryId: string;
+  productType?: ProductType;
   category: {
     id: string;
     name: string;
@@ -151,6 +154,7 @@ export interface GetProductsParams {
   search?: string;
   categoryId?: string;
   sortBy?: "price-asc" | "price-desc" | "newest";
+  productType?: ProductType;
 }
 
 // ================= CONTACT =================
